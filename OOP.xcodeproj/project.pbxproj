@@ -79,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				84E3483A25EB9452003E7D27 /* OOP */,
-				84E3483925EB9452003E7D27 /* Products */,
 				84E3484625EB9455003E7D27 /* LaunchScreen.storyboard */,
 			);
 			sourceTree = "<group>";
@@ -90,11 +89,13 @@
 				84E3483825EB9452003E7D27 /* OOP.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		84E3483A25EB9452003E7D27 /* OOP */ = {
 			isa = PBXGroup;
 			children = (
+				84E3483925EB9452003E7D27 /* Products */,
 				84E3483B25EB9452003E7D27 /* AppDelegate.swift */,
 				84E5BCDA25FA4D6B00702014 /* Model */,
 				84E5BCDB25FA4D7D00702014 /* View */,
