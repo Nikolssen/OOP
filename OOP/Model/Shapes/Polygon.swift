@@ -9,6 +9,8 @@
 import UIKit
 
 class Polygon: NSObject, Shape {
+
+    
     
     private let stroke: Stroke
     private let fill: Fill
@@ -16,7 +18,7 @@ class Polygon: NSObject, Shape {
     private var points = [CGPoint]()
     
     func draw() {
-        if points.count <= 1
+        if !isImplemented()
             {return}
         
         let polygonPath = UIBezierPath()
@@ -32,6 +34,9 @@ class Polygon: NSObject, Shape {
         polygonPath.fill(with: .normal, alpha: fill.opacity)
     }
     
+    func isImplemented() -> Bool {
+        return points.count > 1
+    }
     func add(point: CGPoint) {
         points.append(point)
     }
@@ -43,17 +48,21 @@ class Polygon: NSObject, Shape {
             points.append(point)
     }
     
-    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint? = nil) {
+    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         
         self.stroke = stroke
         self.fill = fill
         
-       if firstPoint != nil
-       {self.points.append(firstPoint!)}
+       self.points.append(firstPoint)
     }
     
-    convenience init(stroke: Stroke, fill: Fill, points: [CGPoint]) {
-        self.init(stroke: stroke, fill: fill)
-        self.points = points
+    convenience init?(stroke: Stroke, fill: Fill, points: [CGPoint]) {
+        if let point = points.first {
+            self.init(stroke: stroke, fill: fill, firstPoint: point)
+            self.points = points
+        }
+        else {
+            return nil
+        }
     }
 }

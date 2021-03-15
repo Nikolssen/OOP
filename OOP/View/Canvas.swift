@@ -25,8 +25,8 @@ class Canvas: UIView {
             shape.draw()
         }
         
-      //  guard let newShape = datasource!.currentShape else {return}
-      //  newShape.draw()
+        guard let newShape = datasource!.currentShape else {return}
+        newShape.draw()
     }
     
     override init(frame:CGRect) {

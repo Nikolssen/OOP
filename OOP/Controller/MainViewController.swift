@@ -39,29 +39,28 @@ class MainViewController: UIViewController {
         
     }
     
-    @IBAction func paintSomething(_ sender: UIBarButtonItem) {
+   
+    @IBAction func clear(_ sender: UIBarButtonItem) {
         canvasDatasource.clear()
-        
-        if shapeOptions.chosenShape === Line.self {
-            let line = Line(stroke: drawOptions.stroke, points: [CGPoint(x: 20, y: 30), CGPoint(x: 10, y: 100), CGPoint(x: 130, y: 90)])
-            canvasDatasource.add(shape: line)
-        }
-        
-        if shapeOptions.chosenShape === Oval.self {
-            let oval = Oval(stroke: drawOptions.stroke, fill: drawOptions.fill, rect: CGRect(x: 45, y: 90, width: 100, height: 56))
-            canvasDatasource.add(shape: oval)
-        }
-        
-        if shapeOptions.chosenShape === Rectangle.self {
-            let rectangle = Rectangle(stroke: drawOptions.stroke, fill: drawOptions.fill, rect: CGRect(x: 100, y: 200, width: 70, height: 60))
-            canvasDatasource.add(shape: rectangle)
-        }
-        
-        if shapeOptions.chosenShape === Polygon.self {
-            let polygon = Polygon(stroke: drawOptions.stroke, fill: drawOptions.fill, points: [CGPoint(x: 130, y: 80), CGPoint(x:100, y: 200), CGPoint(x: 230, y: 180)])
-            canvasDatasource.add(shape: polygon)
-        }
         canvas.setNeedsDisplay()
     }
     
+    @IBAction func processPanGesture(_ sender: UIPanGestureRecognizer) {
+
+            switch sender.state {
+            case .began:
+                canvasDatasource.currentShape = shapeOptions.chosenShape.init(stroke: drawOptions.stroke, fill: drawOptions.fill, firstPoint: sender.location(in: self.canvas))
+            case .changed:
+                canvasDatasource.currentShape!.replace(point: sender.location(in: self.canvas))
+            case .recognized:
+
+                    canvasDatasource.add(shape: canvasDatasource.currentShape!)
+                    canvasDatasource.currentShape = nil
+            
+            default:
+                canvasDatasource.currentShape = nil
+            }
+        self.canvas.setNeedsDisplay()
+        }
+
 }

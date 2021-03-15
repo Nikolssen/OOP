@@ -28,7 +28,7 @@ class Oval: NSObject, Shape {
     private let fill: Fill
     
     func draw() {
-        if self.secondAngle == nil {return}
+        if !isImplemented() {return}
         let ovalPath = UIBezierPath(ovalIn: CGRect(x: x, y: y, width: width, height: height))
         stroke.color.setStroke()
         ovalPath.lineWidth = CGFloat(stroke.width)
@@ -37,18 +37,23 @@ class Oval: NSObject, Shape {
         ovalPath.stroke()
     }
     
+    func isImplemented() -> Bool {
+        return secondAngle != nil
+    }
+    
+    
     func replace(point:CGPoint)  {
         secondAngle = point
     }
     
-    init(stroke: Stroke, fill: Fill, firstAngle: CGPoint) {
+    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.stroke = stroke
         self.fill = fill
-        self.firstAngle = firstAngle
+        self.firstAngle = firstPoint
     }
     
     convenience init(stroke: Stroke, fill: Fill, rect: CGRect) {
-        self.init(stroke: stroke, fill: fill, firstAngle: rect.origin)
+        self.init(stroke: stroke, fill: fill, firstPoint: rect.origin)
         self.secondAngle = CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height)
     }
     

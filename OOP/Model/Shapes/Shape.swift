@@ -11,5 +11,8 @@ import UIKit
 protocol Shape: NSObject {
     
     func draw()
-
+    func isImplemented() -> Bool
+    func replace(point:CGPoint) 
+    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint)
 }
+

@@ -12,7 +12,7 @@ class CanvasDatasource
 {
     private(set) var shapes = [Shape]()
     
-    //var currentShape: Shape? = nil
+    var currentShape: Shape? = nil
     
     func add(shape: Shape)  {
         shapes.append(shape)

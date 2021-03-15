@@ -15,7 +15,7 @@ class Line: NSObject, Shape {
     
     func draw() {
         
-        if points.count <= 1
+        if !isImplemented()
             {return}
         
         let line = UIBezierPath()
@@ -28,6 +28,10 @@ class Line: NSObject, Shape {
         line.stroke()
         
     }
+    func isImplemented() -> Bool {
+        return points.count > 1
+    }
+    
     func add(point: CGPoint) {
         
         points.append(point)
@@ -41,16 +45,24 @@ class Line: NSObject, Shape {
             points.append(point)
     }
     
-    init(stroke: Stroke, firstPoint: CGPoint? = nil) {
+    init(stroke: Stroke, firstPoint: CGPoint) {
         self.stroke = stroke
-        
-        if firstPoint != nil
-            {points.append(firstPoint!)}
+        points.append(firstPoint)
     }
     
-    convenience init(stroke: Stroke, points: [CGPoint]) {
-        self.init(stroke: stroke)
-        self.points = points
+    convenience init?(stroke: Stroke, points: [CGPoint]) {
+        if let point = points.first {
+            self.init(stroke: stroke, firstPoint: point)
+            self.points = points
+        }
+        else {
+            return nil
+        }
+
+    }
+    
+    required convenience init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
+        self.init(stroke: stroke, firstPoint: firstPoint)
     }
 
 }
