@@ -15,16 +15,33 @@ class MainViewController: UIViewController {
     var shapeOptions = ShapeOptions()
     var canvasDatasource = CanvasDatasource()
     
+    @IBOutlet weak var undoButton: UIBarButtonItem!
+    @IBOutlet weak var redoButton: UIBarButtonItem!
     @IBOutlet weak var canvas: Canvas!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         canvas.datasource = canvasDatasource
     }
     
     @IBAction func undoAction(_ sender: UIBarButtonItem) {
+        canvasDatasource.undo()
+        if canvasDatasource.shapes.count == 0
+        {
+            undoButton.isEnabled = false
+        }
+            redoButton.isEnabled = true
+
+        canvas.setNeedsDisplay()
     }
     
     @IBAction func redoAction(_ sender: UIBarButtonItem) {
+        canvasDatasource.redo()
+        if canvasDatasource.undoStack.count == 0 {
+            redoButton.isEnabled = false
+        }
+        undoButton.isEnabled = true
+        canvas.setNeedsDisplay()
     }
     
     @IBAction func pencilOptionsAction(_ sender: UIBarButtonItem) {
@@ -44,6 +61,10 @@ class MainViewController: UIViewController {
     
     @IBAction func clear(_ sender: UIBarButtonItem) {
         canvasDatasource.clear()
+        canvasDatasource.currentShape = nil
+        canvasDatasource.resetUndoStack()
+        redoButton.isEnabled = false
+        undoButton.isEnabled = false
         canvas.setNeedsDisplay()
     }
     
@@ -66,6 +87,9 @@ class MainViewController: UIViewController {
                 if canvasDatasource.currentShape!.canFinalizeDrawing()
                 {
                     canvasDatasource.add(shape: canvasDatasource.currentShape!)
+                    canvasDatasource.resetUndoStack()
+                    redoButton.isEnabled = false
+                    undoButton.isEnabled = true
                     fallthrough
                 }
             }
@@ -82,6 +106,9 @@ class MainViewController: UIViewController {
             {
                 if canvasDatasource.currentShape!.canFinalizeDrawing(){
                     canvasDatasource.add(shape: canvasDatasource.currentShape!)
+                    canvasDatasource.resetUndoStack()
+                    redoButton.isEnabled = false
+                    undoButton.isEnabled = true
                     canvasDatasource.currentShape = nil
                     canvas.setNeedsDisplay()
                 }

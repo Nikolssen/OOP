@@ -11,7 +11,7 @@ import UIKit
 class CanvasDatasource
 {
     private(set) var shapes = [Shape]()
-//    lazy private var undoStack = [Shape]()
+    private(set) var undoStack = [Shape]()
     
     var currentShape: Shape?
     
@@ -20,17 +20,22 @@ class CanvasDatasource
     }
     
     func clear() {
-        shapes.removeAll(keepingCapacity: false)
-        currentShape = nil
+        shapes.removeAll()
     }
-//
-//    func undo() {
-//        if let shape = shapes.popLast()
-//        {
-//            undoStack.append(shape)
-//        }
-//    }
-//    func redo() {
-//
-//    }
+
+    func undo() {
+        if let shape = shapes.popLast()
+        {
+            undoStack.append(shape)
+        }
+    }
+    func redo() {
+        if let shape = undoStack.popLast(){
+            shapes.append(shape)
+        }
+    }
+    
+    func resetUndoStack(){
+        undoStack.removeAll()
+    }
 }
