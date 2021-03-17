@@ -9,17 +9,18 @@
 import UIKit
 
 class Preview: UIView {
-
-    weak var options: DrawOptions!
+    
+    var options: DrawOptions!
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(rect: CGRect(x: 25, y: 25, width: 50, height: 50))
         path.lineWidth = CGFloat(options.stroke.width)
         options.stroke.color.setStroke()
         options.fill.color.setFill()
-        path.stroke()
         path.fill(with: CGBlendMode.normal, alpha: options.fill.opacity)
+        path.stroke()
+        
     }
     
-
+    
 }

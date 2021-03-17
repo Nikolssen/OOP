@@ -9,32 +9,29 @@
 import UIKit
 
 class Canvas: UIView {
-
     
-    //as far as draw(_rect:) method is called indirectly
-    //by the system, the array cannot be send as paramater
-    //the keeping array in canvas spoils single-responsibility
     
-    weak var datasource: CanvasDatasource?;
-
+    var datasource: CanvasDatasource?;
+    
     override func draw(_ rect: CGRect) {
-  
-        guard let shapes = datasource?.shapes else {return}
         
-        for shape in shapes {
-            shape.draw()
+        if let shapes = datasource?.shapes {
+            
+            for shape in shapes {
+                shape.draw()
+            }
         }
-        
-        guard let newShape = datasource!.currentShape else {return}
-        newShape.draw()
+        if let newShape = datasource!.currentShape {
+            newShape.draw()
+        }
     }
     
     override init(frame:CGRect) {
         super.init(frame:frame)
         self.backgroundColor = UIColor.white
-
+        
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         

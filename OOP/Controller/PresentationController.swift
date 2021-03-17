@@ -16,7 +16,7 @@ class ModalDelegate: NSObject, UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return PresentationController(presentedViewController: presented, presenting: presenting)
     }
-
+    
 }
 
 class PresentationController: UIPresentationController {
@@ -33,7 +33,7 @@ class PresentationController: UIPresentationController {
         NSLayoutConstraint.activate([dimmingView.leadingAnchor.constraint(equalTo: superView.leadingAnchor), dimmingView.trailingAnchor.constraint(equalTo: superView.trailingAnchor), dimmingView.bottomAnchor.constraint(equalTo: superView.bottomAnchor), dimmingView.topAnchor.constraint(equalTo: superView.topAnchor)])
         dimmingView.alpha = 1
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: {_ in self.dimmingView.alpha = 1}, completion: nil)
-
+        
     }
     
     
@@ -45,7 +45,7 @@ class PresentationController: UIPresentationController {
     
     override var frameOfPresentedViewInContainerView: CGRect{
         let bounds = presentingViewController.view.bounds
-        let size = CGSize(width: 375, height: 375)
+        let size = CGSize(width: UIScreen.main.bounds.size.width, height: 375)
         let origin = CGPoint(x: 0, y: bounds.maxY - size.height + 25)
         return CGRect(origin: origin, size: size)
     }

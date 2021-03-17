@@ -24,6 +24,7 @@
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="4jq-DR-AfP" appends="YES" id="pHN-bN-CAV"/>
+                        <outletCollection property="gestureRecognizers" destination="eFb-av-Gmb" appends="YES" id="7Ku-ev-sIY"/>
                     </connections>
                 </view>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjW-ij-L3g">
@@ -31,10 +32,16 @@
                     <items>
                         <barButtonItem title="Undo" image="arrowshape.turn.up.left.circle" catalog="system" id="TPU-Cr-KgV">
                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="undoAction:" destination="-1" id="orS-w5-MZc"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ZhS-Ob-szW"/>
                         <barButtonItem title="Redo" image="arrowshape.turn.up.right.circle" catalog="system" id="Kt1-k5-5Ri">
                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="redoAction:" destination="-1" id="ZGD-Y7-vUu"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="dDe-45-RZu"/>
                         <barButtonItem title="Item" image="hexagon" catalog="system" id="T6M-mD-59D">
@@ -63,6 +70,7 @@
                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </items>
+                    <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </toolbar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,6 +91,11 @@
                 <action selector="processPanGesture:" destination="-1" id="VaC-AO-74x"/>
             </connections>
         </panGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="eFb-av-Gmb">
+            <connections>
+                <action selector="processLongTouch:" destination="-1" id="7o4-PX-Zrz"/>
+            </connections>
+        </pongPressGestureRecognizer>
     </objects>
     <resources>
         <image name="arrowshape.turn.up.left.circle" catalog="system" width="64" height="60"/>

@@ -9,7 +9,7 @@
 import UIKit
 
 class ShapeOptions{
-    private(set) static var possibleShapes = ["Line", "Rectangle", "Oval", "Polygon"]
+    private(set) static var possibleShapes = ["Line", "Rectangle", "Oval", "Polygon", "Circle", "Trapezium"]
     
     private(set) var chosenShape: Shape.Type
     

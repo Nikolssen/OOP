@@ -9,7 +9,10 @@
 import UIKit
 
 class Rectangle: NSObject, Shape {
-
+    var isPainting: Bool
+    let isDiscrete: Bool = true
+    
+    
     let firstAngle: CGPoint
     var secondAngle: CGPoint?
     var height: CGFloat {get{
@@ -28,33 +31,47 @@ class Rectangle: NSObject, Shape {
     private let stroke: Stroke
     private let fill: Fill
     
+    
     func draw() {
-        if !isImplemented() {return}
-     
-        let rectanglePath = UIBezierPath(rect: CGRect(x: x, y: y, width: width, height: height))
-        stroke.color.setStroke()
-        rectanglePath.lineWidth = CGFloat(stroke.width)
-        fill.color.setFill()
-        rectanglePath.fill(with: .normal, alpha: fill.opacity)
-        rectanglePath.stroke()
+        if secondAngle != nil {
+            
+            let rectanglePath = UIBezierPath(rect: CGRect(x: x, y: y, width: width, height: height))
+            stroke.color.setStroke()
+            rectanglePath.lineWidth = CGFloat(stroke.width)
+            if isPainting
+            {
+                let dash = [CGFloat(15.0), CGFloat(15.0)]
+                rectanglePath.setLineDash(dash, count: 2, phase: CGFloat(30))
+            }
+            fill.color.setFill()
+            rectanglePath.fill(with: .normal, alpha: fill.opacity)
+            rectanglePath.stroke()
+        }
+    }
+    func canFinalizeDrawing() -> Bool {
+        isPainting = false
+        return true
     }
     
-    func isImplemented() -> Bool {
-        return secondAngle != nil
-    }
     
     func replace(point:CGPoint)  {
         secondAngle = point
     }
     
+    func add(point: CGPoint) {
+        
+    }
+    
     required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.stroke = stroke
         self.fill = fill
-        
+        isPainting = true
         self.firstAngle = firstPoint
     }
+    
     convenience init(stroke: Stroke, fill: Fill, rect: CGRect) {
         self.init(stroke: stroke, fill: fill, firstPoint: rect.origin)
         self.secondAngle = CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height)
+        isPainting = false
     }
 }

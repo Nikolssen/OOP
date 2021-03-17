@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		84021F5F25FCB0F700D77BFC /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84021F5E25FCB0F700D77BFC /* PresentationController.swift */; };
+		840B7BB22601448F00FF643D /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B7BB12601448F00FF643D /* Circle.swift */; };
+		840B7BB426014A6F00FF643D /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B7BB326014A6F00FF643D /* Trapezium.swift */; };
 		8412385425FE2444002030B1 /* Stroke+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412385325FE2444002030B1 /* Stroke+Fill.swift */; };
 		8412EDC825FB3DC40016BE43 /* PenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412EDC625FB3DC40016BE43 /* PenViewController.swift */; };
 		8412EDC925FB3DC40016BE43 /* PenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8412EDC725FB3DC40016BE43 /* PenViewController.xib */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		84021F5E25FCB0F700D77BFC /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		840B7BB12601448F00FF643D /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		840B7BB326014A6F00FF643D /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
 		8412385325FE2444002030B1 /* Stroke+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke+Fill.swift"; sourceTree = "<group>"; };
 		8412EDC625FB3DC40016BE43 /* PenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenViewController.swift; sourceTree = "<group>"; };
 		8412EDC725FB3DC40016BE43 /* PenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PenViewController.xib; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				84FD995F25FBB2720058293B /* Rectangle.swift */,
 				84C047DB25FD4FF5006DB895 /* Oval.swift */,
 				84C047DD25FD5532006DB895 /* Polygon.swift */,
+				840B7BB12601448F00FF643D /* Circle.swift */,
+				840B7BB326014A6F00FF643D /* Trapezium.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -233,9 +239,11 @@
 				84F6C13825FCEBB600DA9190 /* ShapeSelectionController.swift in Sources */,
 				84E3485225EB9533003E7D27 /* Canvas.swift in Sources */,
 				84C047DC25FD4FF5006DB895 /* Oval.swift in Sources */,
+				840B7BB426014A6F00FF643D /* Trapezium.swift in Sources */,
 				84021F5F25FCB0F700D77BFC /* PresentationController.swift in Sources */,
 				84FD996025FBB2720058293B /* Rectangle.swift in Sources */,
 				84D8B91525FB70E100C98B72 /* DrawOptions.swift in Sources */,
+				840B7BB22601448F00FF643D /* Circle.swift in Sources */,
 				84C047DA25FD3532006DB895 /* ShapeOptions.swift in Sources */,
 				84FD995E25FBA34B0058293B /* Line.swift in Sources */,
 				84C35AA225FAB58D00BF7021 /* MainViewController.swift in Sources */,

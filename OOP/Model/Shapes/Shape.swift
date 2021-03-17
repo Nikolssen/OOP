@@ -9,10 +9,13 @@
 import UIKit
 
 protocol Shape: NSObject {
+   
+    var isDiscrete: Bool {get}
     
     func draw()
-    func isImplemented() -> Bool
-    func replace(point:CGPoint) 
+    func replace(point:CGPoint)
+    func add(point: CGPoint)
     init(stroke: Stroke, fill: Fill, firstPoint: CGPoint)
+    func canFinalizeDrawing() -> Bool
 }
 

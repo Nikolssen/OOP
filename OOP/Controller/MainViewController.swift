@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     
     var drawOptions = DrawOptions()
     var shapeOptions = ShapeOptions()
@@ -18,13 +18,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var canvas: Canvas!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         canvas.datasource = canvasDatasource
-        
-        
     }
-
-
+    
+    @IBAction func undoAction(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func redoAction(_ sender: UIBarButtonItem) {
+    }
+    
     @IBAction func pencilOptionsAction(_ sender: UIBarButtonItem) {
         let penVC = PenViewController(nibName: "PenViewController", bundle: nil)
         penVC.options = drawOptions
@@ -39,28 +41,51 @@ class MainViewController: UIViewController {
         
     }
     
-   
+    
     @IBAction func clear(_ sender: UIBarButtonItem) {
         canvasDatasource.clear()
         canvas.setNeedsDisplay()
     }
     
     @IBAction func processPanGesture(_ sender: UIPanGestureRecognizer) {
-
-            switch sender.state {
-            case .began:
+        
+        switch sender.state {
+        case .began:
+            if (canvasDatasource.currentShape != nil) {
+                canvasDatasource.currentShape!.add(point:sender.location(in: self.canvas))
+            }
+            else
+            {
                 canvasDatasource.currentShape = shapeOptions.chosenShape.init(stroke: drawOptions.stroke, fill: drawOptions.fill, firstPoint: sender.location(in: self.canvas))
-            case .changed:
-                canvasDatasource.currentShape!.replace(point: sender.location(in: self.canvas))
-            case .recognized:
-
+            }
+        case .changed:
+            canvasDatasource.currentShape!.replace(point: sender.location(in: self.canvas))
+        case .recognized:
+            if canvasDatasource.currentShape!.isDiscrete
+            {
+                if canvasDatasource.currentShape!.canFinalizeDrawing()
+                {
+                    canvasDatasource.add(shape: canvasDatasource.currentShape!)
+                    fallthrough
+                }
+            }
+        default:
+            canvasDatasource.currentShape = nil
+        }
+        self.canvas.setNeedsDisplay()
+    }
+    
+    @IBAction func processLongTouch(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .recognized
+        {
+            if canvasDatasource.currentShape != nil
+            {
+                if canvasDatasource.currentShape!.canFinalizeDrawing(){
                     canvasDatasource.add(shape: canvasDatasource.currentShape!)
                     canvasDatasource.currentShape = nil
-            
-            default:
-                canvasDatasource.currentShape = nil
+                    canvas.setNeedsDisplay()
+                }
             }
-        self.canvas.setNeedsDisplay()
         }
-
+    }
 }

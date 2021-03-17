@@ -11,8 +11,9 @@ import UIKit
 class CanvasDatasource
 {
     private(set) var shapes = [Shape]()
+//    lazy private var undoStack = [Shape]()
     
-    var currentShape: Shape? = nil
+    var currentShape: Shape?
     
     func add(shape: Shape)  {
         shapes.append(shape)
@@ -20,6 +21,16 @@ class CanvasDatasource
     
     func clear() {
         shapes.removeAll(keepingCapacity: false)
+        currentShape = nil
     }
-    
+//
+//    func undo() {
+//        if let shape = shapes.popLast()
+//        {
+//            undoStack.append(shape)
+//        }
+//    }
+//    func redo() {
+//
+//    }
 }

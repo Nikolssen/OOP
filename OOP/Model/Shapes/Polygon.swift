@@ -9,34 +9,39 @@
 import UIKit
 
 class Polygon: NSObject, Shape {
-
+    
     
     
     private let stroke: Stroke
     private let fill: Fill
     
     private var points = [CGPoint]()
-    
+    var isPainting: Bool
+    let isDiscrete = false
     func draw() {
-        if !isImplemented()
-            {return}
-        
-        let polygonPath = UIBezierPath()
-        polygonPath.move(to: points.first!)
-        for point in points[1...] {
-            polygonPath.addLine(to: point)
+        if points.count > 1
+        {
+            
+            let polygonPath = UIBezierPath()
+            polygonPath.move(to: points.first!)
+            for point in points[1...] {
+                polygonPath.addLine(to: point)
+            }
+            polygonPath.close()
+            polygonPath.lineWidth = CGFloat(stroke.width)
+            fill.color.setFill()
+            stroke.color.setStroke()
+            if isPainting
+            {
+                let dash = [CGFloat(15.0), CGFloat(15.0)]
+                polygonPath.setLineDash(dash, count: 2, phase: CGFloat(30))
+            }
+            polygonPath.fill(with: .normal, alpha: fill.opacity)
+            polygonPath.stroke()
+            
         }
-        polygonPath.close()
-        polygonPath.lineWidth = CGFloat(stroke.width)
-        fill.color.setFill()
-        stroke.color.setStroke()
-        polygonPath.stroke()
-        polygonPath.fill(with: .normal, alpha: fill.opacity)
     }
     
-    func isImplemented() -> Bool {
-        return points.count > 1
-    }
     func add(point: CGPoint) {
         points.append(point)
     }
@@ -45,21 +50,28 @@ class Polygon: NSObject, Shape {
         if (points.count>1) {
             _ = points.popLast()
         }
-            points.append(point)
+        points.append(point)
     }
+    
+    func canFinalizeDrawing() -> Bool {
+        isPainting = false
+        return true
+    }
+    
     
     required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         
         self.stroke = stroke
         self.fill = fill
-        
-       self.points.append(firstPoint)
+        isPainting = true
+        self.points.append(firstPoint)
     }
     
     convenience init?(stroke: Stroke, fill: Fill, points: [CGPoint]) {
         if let point = points.first {
             self.init(stroke: stroke, fill: fill, firstPoint: point)
             self.points = points
+            isPainting = false
         }
         else {
             return nil

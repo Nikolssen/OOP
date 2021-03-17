@@ -9,12 +9,12 @@
 import UIKit
 
 class PenViewController: UIViewController, Presentable {
- 
-    weak var options: DrawOptions!
+    
+    var options: DrawOptions!
     
     @IBOutlet weak var strokeWidthSlider: UISlider!
     @IBOutlet weak var strokeFillControl: UISegmentedControl!
-
+    
     @IBOutlet weak var opacitySlider: UISlider!
     @IBOutlet weak var redSlider: UISlider!
     @IBOutlet weak var greenSlider: UISlider!
@@ -64,7 +64,7 @@ class PenViewController: UIViewController, Presentable {
         {
             options.fill.setColor(UIColor(red: red, green: green, blue: blue))
         }
-
+        
         preview.setNeedsDisplay()
     }
     
