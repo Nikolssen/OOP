@@ -35,6 +35,7 @@ class ShapeSelectionController: UITableViewController, Presentable {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "shapeCell", for: indexPath)
         let textData = ShapeOptions.possibleShapes[indexPath.row]
+        cell.textLabel?.textColor = UIColor(named: "LabelColorAsset")
         cell.textLabel?.text = textData
         return cell
     }

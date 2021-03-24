@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -58,6 +60,7 @@
                         <segment title="Stroke"/>
                         <segment title="Fill"/>
                     </segments>
+                    <color key="tintColor" name="LabelColorAsset"/>
                     <connections>
                         <action selector="typeSwitched:" destination="-1" eventType="valueChanged" id="nU6-x3-eod"/>
                     </connections>
@@ -68,8 +71,8 @@
                         <constraint firstAttribute="width" constant="32" id="IAd-17-F3T"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
+                    <color key="textColor" name="LabelColorAsset"/>
+                    <color key="highlightedColor" name="LabelColorAsset"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gt-dJ-cs3">
                     <rect key="frame" x="298" y="320" width="32" height="20.5"/>
@@ -77,8 +80,8 @@
                         <constraint firstAttribute="width" constant="32" id="xes-eM-l9y"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
+                    <color key="textColor" name="LabelColorAsset"/>
+                    <color key="highlightedColor" name="LabelColorAsset"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUH-3s-5qI">
                     <rect key="frame" x="298" y="282" width="32" height="20.5"/>
@@ -86,8 +89,8 @@
                         <constraint firstAttribute="width" constant="32" id="dZA-a4-Gdo"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
+                    <color key="textColor" name="LabelColorAsset"/>
+                    <color key="highlightedColor" name="LabelColorAsset"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="gh4-IQ-b6L">
                     <rect key="frame" x="54" y="122" width="267" height="60"/>
@@ -101,8 +104,8 @@
                                         <constraint firstAttribute="height" constant="29.5" id="S5Z-em-chf"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
+                                    <color key="textColor" name="LabelColorAsset"/>
+                                    <color key="highlightedColor" name="LabelColorAsset"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill opacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-fc-ZPF">
                                     <rect key="frame" x="0.0" y="39.5" width="108" height="20.5"/>
@@ -110,8 +113,8 @@
                                         <constraint firstAttribute="height" constant="20.5" id="wKk-pJ-38H"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
+                                    <color key="textColor" name="LabelColorAsset"/>
+                                    <color key="highlightedColor" name="LabelColorAsset"/>
                                 </label>
                             </subviews>
                         </stackView>
@@ -120,18 +123,17 @@
                             <subviews>
                                 <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="wlF-AX-wvx">
                                     <rect key="frame" x="-2" y="0.0" width="154" height="31"/>
-                                    <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" name="LabelColorAsset"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="Unq-56-CTq"/>
                                     </constraints>
-                                    <color key="minimumTrackTintColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <connections>
                                         <action selector="widthSliderValueChanged:" destination="-1" eventType="valueChanged" id="sGt-uF-OO7"/>
                                     </connections>
                                 </slider>
                                 <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="x6u-zM-qzN">
                                     <rect key="frame" x="-2" y="30" width="154" height="31"/>
-                                    <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" name="LabelColorAsset"/>
                                     <connections>
                                         <action selector="opacitySliderValueChanged:" destination="-1" eventType="valueChanged" id="WVP-DF-y5T"/>
                                     </connections>
@@ -149,7 +151,8 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Gt-dJ-cs3" secondAttribute="trailing" constant="45" id="DIx-cA-Ka8"/>
@@ -176,7 +179,6 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7VI-Y0-TDq" secondAttribute="bottom" constant="30" id="yIq-Ra-YdP"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="YsG-LJ-U3N" appends="YES" id="6fm-33-8zD"/>
             </connections>
@@ -188,4 +190,12 @@
             </connections>
         </swipeGestureRecognizer>
     </objects>
+    <resources>
+        <namedColor name="LabelColorAsset">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

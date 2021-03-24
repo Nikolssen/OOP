@@ -32,8 +32,13 @@ class PenViewController: UIViewController, Presentable {
         self.preferredContentSize = CGSize(width: 375, height: 375)
         let rgb = options!.stroke.color.rgbDescription()
         redSlider.setValue(Float(rgb.red), animated: false)
+        redLabel.text = "\(rgb.red)"
         greenSlider.setValue(Float(rgb.green), animated: false)
+        greenLabel.text = "\(rgb.green)"
         blueSlider.setValue(Float(rgb.blue), animated: false)
+        blueLabel.text = "\(rgb.blue)"
+        let segmentTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "LabelColorAsset")]
+        strokeFillControl.setTitleTextAttributes(segmentTextAttributes as [NSAttributedString.Key : Any], for: .normal)
         strokeWidthSlider.setValue(Float(options.stroke.width), animated: false)
         opacitySlider.setValue(Float(options.fill.opacity), animated: false)
         preview.options = options
