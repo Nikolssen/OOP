@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -103,6 +102,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="108" height="29.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29.5" id="S5Z-em-chf"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="108" id="piE-3I-QPd"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" name="LabelColorAsset"/>
@@ -111,6 +111,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill opacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-fc-ZPF">
                                     <rect key="frame" x="0.0" y="39.5" width="108" height="20.5"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="108" id="XL7-Z4-suh"/>
                                         <constraint firstAttribute="height" constant="20.5" id="wKk-pJ-38H"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -125,9 +126,6 @@
                                 <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="wlF-AX-wvx">
                                     <rect key="frame" x="-2" y="0.0" width="154" height="31"/>
                                     <color key="tintColor" name="LabelColorAsset"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="150" id="Unq-56-CTq"/>
-                                    </constraints>
                                     <connections>
                                         <action selector="widthSliderValueChanged:" destination="-1" eventType="valueChanged" id="sGt-uF-OO7"/>
                                     </connections>

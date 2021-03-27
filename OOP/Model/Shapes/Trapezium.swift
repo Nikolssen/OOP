@@ -7,15 +7,13 @@
 //
 //
 import UIKit
-class Trapezium: NSObject, Shape {
-    
-    var isPainting: Bool
-    var isDiscrete = false
+class Trapezium: NSObject, Shape{
+
     private let stroke: Stroke
     private let fill: Fill
     private var points = [CGPoint]()
     
-    func draw() {
+    func draw(isPrototype: Bool) {
         if points.count > 1
         {
             
@@ -33,7 +31,7 @@ class Trapezium: NSObject, Shape {
             polygonPath.lineWidth = CGFloat(stroke.width)
             
             stroke.color.setStroke()
-            if isPainting
+            if isPrototype
             {
                 let dash = [CGFloat(15.0), CGFloat(15.0)]
                 polygonPath.setLineDash(dash, count: 2, phase: CGFloat(30))
@@ -84,15 +82,11 @@ class Trapezium: NSObject, Shape {
     
     func add(point: CGPoint) {
         points.append(point)
-        if points.count == 4{
-            isDiscrete = true
-        }
         
     }
-    func canFinalizeDrawing() -> Bool {
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         
         if points.count == 4 {
-            isPainting = false
             return true
         }
         return false
@@ -103,14 +97,12 @@ class Trapezium: NSObject, Shape {
         self.stroke = stroke
         self.fill = fill
         self.points.append(firstPoint)
-        isPainting = true
     }
     
     convenience init?(stroke: Stroke, fill: Fill, points: [CGPoint]) {
         if points.count == 4 {
             self.init(stroke: stroke, fill: fill, firstPoint: points.first!)
             self.points = points
-            isPainting = false
         }
         else {
             return nil

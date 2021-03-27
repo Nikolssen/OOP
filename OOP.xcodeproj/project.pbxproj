@@ -150,11 +150,11 @@
 			children = (
 				84FD995B25FBA1E90058293B /* Shape.swift */,
 				84FD995D25FBA34B0058293B /* Line.swift */,
+				84C047DD25FD5532006DB895 /* Polygon.swift */,
+				840B7BB326014A6F00FF643D /* Trapezium.swift */,
 				84FD995F25FBB2720058293B /* Rectangle.swift */,
 				84C047DB25FD4FF5006DB895 /* Oval.swift */,
-				84C047DD25FD5532006DB895 /* Polygon.swift */,
 				840B7BB12601448F00FF643D /* Circle.swift */,
-				840B7BB326014A6F00FF643D /* Trapezium.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -388,7 +388,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9G6V47L895;
 				INFOPLIST_FILE = OOP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -407,7 +407,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9G6V47L895;
 				INFOPLIST_FILE = OOP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

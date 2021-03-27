@@ -8,15 +8,13 @@
 
 import UIKit
 
-class Line: NSObject, Shape {
+class Line: NSObject, Shape{
     
-    var isPainting: Bool
-    let isDiscrete = false
     
     private let stroke: Stroke
     private var points = [CGPoint]()
-    
-    func draw() {
+
+    func draw(isPrototype: Bool) {
         
         if points.count > 1
         {
@@ -27,7 +25,7 @@ class Line: NSObject, Shape {
                 line.addLine(to: point)
             }
             line.lineWidth = CGFloat(stroke.width)
-            if isPainting
+            if isPrototype
             {
                 let dash = [CGFloat(15.0), CGFloat(15.0)]
                 line.setLineDash(dash, count: 2, phase: CGFloat(30))
@@ -52,22 +50,20 @@ class Line: NSObject, Shape {
         points.append(point)
     }
     
-    func canFinalizeDrawing() -> Bool {
-        isPainting = false
-        return true
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+        return !afterPanGesture
     }
+    
     
     init(stroke: Stroke, firstPoint: CGPoint) {
         self.stroke = stroke
         points.append(firstPoint)
-        isPainting = true
     }
     
     convenience init?(stroke: Stroke, points: [CGPoint]) {
         if let point = points.first {
             self.init(stroke: stroke, firstPoint: point)
             self.points = points
-            isPainting = false
         }
         else {
             return nil

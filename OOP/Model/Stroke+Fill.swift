@@ -8,9 +8,14 @@
 
 import UIKit
 
-struct Stroke {
+struct Stroke: Encodable {
     private(set) var color: UIColor
     private(set) var width: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case color
+        case width
+    }
     
     mutating func setWidth(_ width: Int) {
         switch width {
@@ -37,12 +42,21 @@ struct Stroke {
             self.width = width
         }
     }
-    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try? container.encode(color.hexDescription(), forKey: .color)
+        try? container.encode(width, forKey: .width)
+    }
 }
 
-struct Fill {
+struct Fill: Encodable {
     private(set) var color: UIColor
     private(set) var opacity: CGFloat
+    
+    enum CodingKeys: String, CodingKey {
+        case color
+        case opacity
+    }
     
     mutating func setColor(_ color: UIColor){
         self.color = color
@@ -57,5 +71,10 @@ struct Fill {
         default:
             self.opacity = opacity
         }
+    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try? container.encode(color.hexDescription(), forKey: .color)
+        try? container.encode(opacity, forKey: .opacity)
     }
 }

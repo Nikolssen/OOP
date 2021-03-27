@@ -20,4 +20,8 @@ extension UIColor{
         getRed(&red, green: &green, blue: &blue, alpha: nil)
         return (Int(red * 255), Int(green * 255), Int(blue * 255))
     }
+    func hexDescription() -> String {
+        let rgb = self.rgbDescription()
+        return String(format: "#%02X%02X%02X", rgb.red, rgb.green, rgb.blue)
+    }
 }

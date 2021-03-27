@@ -8,9 +8,7 @@
 
 import UIKit
 
-class Rectangle: NSObject, Shape {
-    var isPainting: Bool
-    let isDiscrete: Bool = true
+class Rectangle: NSObject, Shape, Encodable {
     
     
     let firstAngle: CGPoint
@@ -32,13 +30,13 @@ class Rectangle: NSObject, Shape {
     private let fill: Fill
     
     
-    func draw() {
+    func draw(isPrototype: Bool) {
         if secondAngle != nil {
             
             let rectanglePath = UIBezierPath(rect: CGRect(x: x, y: y, width: width, height: height))
             stroke.color.setStroke()
             rectanglePath.lineWidth = CGFloat(stroke.width)
-            if isPainting
+            if isPrototype
             {
                 let dash = [CGFloat(15.0), CGFloat(15.0)]
                 rectanglePath.setLineDash(dash, count: 2, phase: CGFloat(30))
@@ -48,30 +46,21 @@ class Rectangle: NSObject, Shape {
             rectanglePath.stroke()
         }
     }
-    func canFinalizeDrawing() -> Bool {
-        isPainting = false
-        return true
-    }
     
     
     func replace(point:CGPoint)  {
         secondAngle = point
     }
     
-    func add(point: CGPoint) {
-        
-    }
     
     required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.stroke = stroke
         self.fill = fill
-        isPainting = true
         self.firstAngle = firstPoint
     }
     
     convenience init(stroke: Stroke, fill: Fill, rect: CGRect) {
         self.init(stroke: stroke, fill: fill, firstPoint: rect.origin)
         self.secondAngle = CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height)
-        isPainting = false
     }
 }

@@ -82,9 +82,8 @@ class MainViewController: UIViewController {
         case .changed:
             canvasDatasource.currentShape!.replace(point: sender.location(in: self.canvas))
         case .recognized:
-            if canvasDatasource.currentShape!.isDiscrete
-            {
-                if canvasDatasource.currentShape!.canFinalizeDrawing()
+
+                if canvasDatasource.currentShape!.canFinalizeDrawing(afterPanGesture: true)
                 {
                     canvasDatasource.add(shape: canvasDatasource.currentShape!)
                     canvasDatasource.resetUndoStack()
@@ -92,7 +91,6 @@ class MainViewController: UIViewController {
                     undoButton.isEnabled = true
                     fallthrough
                 }
-            }
         default:
             canvasDatasource.currentShape = nil
         }
@@ -104,7 +102,7 @@ class MainViewController: UIViewController {
         {
             if canvasDatasource.currentShape != nil
             {
-                if canvasDatasource.currentShape!.canFinalizeDrawing(){
+                if canvasDatasource.currentShape!.canFinalizeDrawing(afterPanGesture: false){
                     canvasDatasource.add(shape: canvasDatasource.currentShape!)
                     canvasDatasource.resetUndoStack()
                     redoButton.isEnabled = false
@@ -115,4 +113,13 @@ class MainViewController: UIViewController {
             }
         }
     }
+    override func didReceiveMemoryWarning() {
+        canvasDatasource.clear()
+        canvasDatasource.currentShape = nil
+        canvasDatasource.resetUndoStack()
+        redoButton.isEnabled = false
+        undoButton.isEnabled = false
+        canvas.setNeedsDisplay()
+    }
 }
+

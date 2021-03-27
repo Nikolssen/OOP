@@ -9,8 +9,7 @@
 import UIKit
 
 class Oval: NSObject, Shape {
-    var isPainting: Bool
-    let isDiscrete = true
+
     
     let firstAngle: CGPoint
     var secondAngle: CGPoint?
@@ -31,13 +30,13 @@ class Oval: NSObject, Shape {
     private let stroke: Stroke
     private let fill: Fill
     
-    func draw() {
+    func draw(isPrototype: Bool) {
         if secondAngle != nil {
             let ovalPath = UIBezierPath(ovalIn: CGRect(x: x, y: y, width: width, height: height))
             stroke.color.setStroke()
             ovalPath.lineWidth = CGFloat(stroke.width)
             fill.color.setFill()
-            if isPainting
+            if isPrototype
             {
                 let dash = [CGFloat(15.0), CGFloat(15.0)]
                 ovalPath.setLineDash(dash, count: 2, phase: CGFloat(30))
@@ -46,16 +45,9 @@ class Oval: NSObject, Shape {
             ovalPath.stroke()
         }}
     
-    func add(point: CGPoint)  {
-        
-    }
     
     func replace(point:CGPoint)  {
         secondAngle = point
-    }
-    func canFinalizeDrawing() -> Bool {
-        isPainting = false
-        return true
     }
     
     
@@ -63,13 +55,13 @@ class Oval: NSObject, Shape {
         self.stroke = stroke
         self.fill = fill
         self.firstAngle = firstPoint
-        isPainting = true
+
     }
     
     convenience init(stroke: Stroke, fill: Fill, rect: CGRect) {
         self.init(stroke: stroke, fill: fill, firstPoint: rect.origin)
         self.secondAngle = CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height)
-        isPainting = false
+
     }
     
 }

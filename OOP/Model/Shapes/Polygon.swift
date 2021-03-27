@@ -8,17 +8,15 @@
 
 import UIKit
 
-class Polygon: NSObject, Shape {
+class Polygon: NSObject, Shape{
     
     
     
     private let stroke: Stroke
     private let fill: Fill
-    
     private var points = [CGPoint]()
-    var isPainting: Bool
-    let isDiscrete = false
-    func draw() {
+    
+    func draw(isPrototype: Bool) {
         if points.count > 1
         {
             
@@ -31,7 +29,7 @@ class Polygon: NSObject, Shape {
             polygonPath.lineWidth = CGFloat(stroke.width)
             fill.color.setFill()
             stroke.color.setStroke()
-            if isPainting
+            if isPrototype
             {
                 let dash = [CGFloat(15.0), CGFloat(15.0)]
                 polygonPath.setLineDash(dash, count: 2, phase: CGFloat(30))
@@ -53,9 +51,8 @@ class Polygon: NSObject, Shape {
         points.append(point)
     }
     
-    func canFinalizeDrawing() -> Bool {
-        isPainting = false
-        return true
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+        return !afterPanGesture
     }
     
     
@@ -63,7 +60,6 @@ class Polygon: NSObject, Shape {
         
         self.stroke = stroke
         self.fill = fill
-        isPainting = true
         self.points.append(firstPoint)
     }
     
@@ -71,7 +67,6 @@ class Polygon: NSObject, Shape {
         if let point = points.first {
             self.init(stroke: stroke, fill: fill, firstPoint: point)
             self.points = points
-            isPainting = false
         }
         else {
             return nil

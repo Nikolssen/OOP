@@ -11,24 +11,23 @@ import UIKit
 class Canvas: UIView {
     
     
-    var datasource: CanvasDatasource?;
+    weak var datasource: CanvasDatasource?;
     
     override func draw(_ rect: CGRect) {
         
         if let shapes = datasource?.shapes {
             
             for shape in shapes {
-                shape.draw()
+                shape.draw(isPrototype: false)
             }
         }
         if let newShape = datasource!.currentShape {
-            newShape.draw()
+            newShape.draw(isPrototype: true)
         }
     }
     
     override init(frame:CGRect) {
         super.init(frame:frame)
-        self.backgroundColor = UIColor.white
         
     }
     
@@ -36,4 +35,5 @@ class Canvas: UIView {
         super.init(coder: coder)
         
     }
+    
 }
