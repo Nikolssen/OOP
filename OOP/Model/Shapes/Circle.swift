@@ -8,14 +8,20 @@
 
 import UIKit
 
-class Circle: NSObject, Shape {
+class Circle: Shape {
     
     var radius: CGFloat?
     let center: CGPoint
     private let stroke: Stroke
     private let fill: Fill
     
-    func draw(isPrototype: Bool) {
+    enum CodingKeys: String, CodingKey {
+        case stroke
+        case fill
+        case radius
+        case center
+    }
+    override func draw(isPrototype: Bool) {
         if radius != nil {
             let ovalPath = UIBezierPath(arcCenter: center, radius: radius!, startAngle: 0, endAngle: (CGFloat.pi * 2), clockwise: true)
             stroke.color.setStroke()
@@ -31,23 +37,44 @@ class Circle: NSObject, Shape {
         }
     }
     
-    func replace(point: CGPoint) {
+    override func replace(point: CGPoint) {
         let x = center.x - point.x
         let y = center.y - point.y
         radius = sqrt(x*x + y*y)
     }
+    
+    override func className() -> String {
+        return "Circle"
+    }
 
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(stroke, forKey: .stroke)
+        try container.encode(fill, forKey: .fill)
+        try container.encode(radius, forKey: .radius)
+        try container.encode(center, forKey: .center)
+    }
     
     required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.stroke = stroke
         self.fill = fill
         self.center = firstPoint
+        super.init()
     }
     
     convenience init(stroke: Stroke, fill: Fill, center: CGPoint, radius: CGFloat)
     {
         self.init(stroke:stroke, fill: fill, firstPoint: center)
         self.radius = radius
+    }
+    
+    convenience required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let stroke = try container.decode(Stroke.self, forKey: .stroke)
+        let fill = try container.decode(Fill.self, forKey: .fill)
+        let center = try container.decode(CGPoint.self, forKey: .center)
+        let radius = try container.decode(CGFloat.self, forKey: .radius)
+        self.init(stroke: stroke, fill: fill, center: center, radius: radius)
     }
     
 }

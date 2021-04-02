@@ -24,4 +24,21 @@ extension UIColor{
         let rgb = self.rgbDescription()
         return String(format: "#%02X%02X%02X", rgb.red, rgb.green, rgb.blue)
     }
+    
+    convenience init(hex: String) {
+        var start = hex.index(after: hex.startIndex)
+        var last = hex.index(start, offsetBy: 2)
+        var substring = hex[start...last]
+        
+        let red = Int(substring, radix: 16) ?? 0
+        start = hex.index(after: last)
+        last  = hex.index(start, offsetBy: 2)
+        substring = hex[start...last]
+        let green = Int(substring, radix: 16) ?? 0
+        start = hex.index(after: last)
+        last = hex.index(start, offsetBy: 2)
+        substring = hex[start...last]
+        let blue = Int(substring, radix: 16) ?? 0
+        self.init(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: 1)
+    }
 }

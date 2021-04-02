@@ -7,13 +7,18 @@
 //
 //
 import UIKit
-class Trapezium: NSObject, Shape{
+class Trapezium: Shape{
 
     private let stroke: Stroke
     private let fill: Fill
     private var points = [CGPoint]()
     
-    func draw(isPrototype: Bool) {
+    enum CodingKeys: String, CodingKey{
+        case stroke
+        case fill
+        case points
+    }
+    override func draw(isPrototype: Bool) {
         if points.count > 1
         {
             
@@ -41,7 +46,7 @@ class Trapezium: NSObject, Shape{
         }
     }
     
-    func replace(point: CGPoint) {
+    override func replace(point: CGPoint) {
         let count = points.count
         
         switch count {
@@ -80,23 +85,32 @@ class Trapezium: NSObject, Shape{
         }
     }
     
-    func add(point: CGPoint) {
+    override func add(point: CGPoint) {
         points.append(point)
         
     }
-    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+    override func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         
         if points.count == 4 {
             return true
         }
         return false
     }
-    
+    override func className() -> String {
+        return "Trapezium"
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(stroke, forKey: .stroke)
+        try container.encode(fill, forKey: .fill)
+        try container.encode(points, forKey: .points)
+    }
     
     required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.stroke = stroke
         self.fill = fill
         self.points.append(firstPoint)
+        super.init()
     }
     
     convenience init?(stroke: Stroke, fill: Fill, points: [CGPoint]) {
@@ -107,6 +121,16 @@ class Trapezium: NSObject, Shape{
         else {
             return nil
         }
+    }
+    
+    convenience required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let points = try container.decode([CGPoint].self, forKey: .points)
+        let stroke = try container.decode(Stroke.self, forKey: .stroke)
+        let fill = try container.decode(Fill.self, forKey: .fill)
+        self.init(stroke: stroke, fill: fill, points: points)!
+        
+        
     }
 }
 

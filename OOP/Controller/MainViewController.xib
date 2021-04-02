@@ -69,8 +69,10 @@
                             <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="0az-U8-ZtO"/>
-                        <barButtonItem enabled="NO" title="Item" image="square.and.arrow.up" catalog="system" id="IHY-VL-4FQ">
-                            <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem title="Item" image="square.and.arrow.up" catalog="system" id="H9n-cn-hpD">
+                            <connections>
+                                <action selector="serializeAction:" destination="-1" id="Qd4-MZ-xUy"/>
+                            </connections>
                         </barButtonItem>
                     </items>
                     <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

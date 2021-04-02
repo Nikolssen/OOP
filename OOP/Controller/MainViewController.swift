@@ -121,5 +121,13 @@ class MainViewController: UIViewController {
         undoButton.isEnabled = false
         canvas.setNeedsDisplay()
     }
+    
+    @IBAction func serializeAction(_ sender: UIBarButtonItem) {
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(canvasDatasource) else {return}
+        canvasDatasource.clear()
+        canvas.setNeedsDisplay()
+        sleep(2)
+    }
 }
 

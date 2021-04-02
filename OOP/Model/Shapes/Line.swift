@@ -8,13 +8,17 @@
 
 import UIKit
 
-class Line: NSObject, Shape{
+class Line: Shape{
     
     
     private let stroke: Stroke
     private var points = [CGPoint]()
-
-    func draw(isPrototype: Bool) {
+    
+    enum CodingKeys: String, CodingKey{
+        case stroke
+        case points
+    }
+    override func draw(isPrototype: Bool) {
         
         if points.count > 1
         {
@@ -35,14 +39,16 @@ class Line: NSObject, Shape{
             
         }
     }
+    override func className() -> String {
+        return "Line"
+    }
     
-    
-    func add(point: CGPoint) {
+    override func add(point: CGPoint) {
         
         points.append(point)
     }
     
-    func replace(point:CGPoint)  {
+    override func replace(point:CGPoint)  {
         
         if (points.count>1) {
             _ = points.popLast()
@@ -50,14 +56,20 @@ class Line: NSObject, Shape{
         points.append(point)
     }
     
-    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+    override func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         return !afterPanGesture
     }
     
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(stroke, forKey: .stroke)
+        try container.encode(points, forKey: .points)
+    }
     
     init(stroke: Stroke, firstPoint: CGPoint) {
         self.stroke = stroke
         points.append(firstPoint)
+        super.init()
     }
     
     convenience init?(stroke: Stroke, points: [CGPoint]) {
@@ -73,6 +85,14 @@ class Line: NSObject, Shape{
     
     required convenience init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.init(stroke: stroke, firstPoint: firstPoint)
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let stroke = try container.decode(Stroke.self, forKey: .stroke)
+        let points = try container.decode([CGPoint].self, forKey: .points)
+        self.init(stroke:stroke, points: points)!
+        
     }
     
 }

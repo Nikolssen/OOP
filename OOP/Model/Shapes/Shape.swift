@@ -8,28 +8,47 @@
 
 import UIKit
 
-protocol Shape:  NSObject{
-
+class Shape:  NSObject, Codable{
     
     func draw(isPrototype: Bool)
-    //Specifies if shape that is to be drawn should be solid or dashed
-    func replace(point:CGPoint)
-    //Replaces the last point or creates new
-    func add(point: CGPoint)
-    //Implement this method if you deal with complex shape
-    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool
-    //Implement this method if you need more than one PanGesture session
-    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint)
-    //Standart init for all shapes in new PanGesture session
+    {
+    //Argument specifies if shape that is to be drawn should be solid or dashed
+        fatalError("Incomplete implementation")
+    }
 
+    func replace(point:CGPoint)
+    {
+    //Replaces the last point or creates new
+        fatalError("Incomplete implementation")
+    }
+    
+    func add(point: CGPoint){
+    //Implement this method if you deal with complex shape
+    }
+    
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool{
+        //Implement this method if you need more than one PanGesture session
+        return true
+    }
+    
+    func className() -> String{
+        fatalError("Incomplete implementation")
+    }
+    
+    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint){
+        //Standart init for all shapes in new PanGesture session
+    }
+    override init() {
+        
+    }
+    func encode(to encoder: Encoder) throws {
+        fatalError("Incomplete implementation")
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("Incomplete implementation")
+    }
     
 }
 
-extension Shape {
-    func add(point: CGPoint)  {
-    }
-    func canFinalizeDrawing(afterPanGesture:Bool) -> Bool {
-        return true
-    }
 
-}

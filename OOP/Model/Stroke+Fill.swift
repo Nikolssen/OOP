@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Stroke: Encodable {
+struct Stroke: Codable {
     private(set) var color: UIColor
     private(set) var width: Int
     
@@ -47,9 +47,18 @@ struct Stroke: Encodable {
         try? container.encode(color.hexDescription(), forKey: .color)
         try? container.encode(width, forKey: .width)
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let hex = try container.decode(String.self, forKey: .color)
+        let color = UIColor(hex: hex)
+        let width = try container.decode(Int.self, forKey: .width)
+        self.init(color: color, width: width)
+    }
+
 }
 
-struct Fill: Encodable {
+struct Fill: Codable {
     private(set) var color: UIColor
     private(set) var opacity: CGFloat
     
@@ -76,5 +85,17 @@ struct Fill: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try? container.encode(color.hexDescription(), forKey: .color)
         try? container.encode(opacity, forKey: .opacity)
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let hex = try container.decode(String.self, forKey: .color)
+        let newColor = UIColor(hex: hex)
+        let newOpacity = try container.decode(CGFloat.self, forKey: .opacity)
+        self.init(color: newColor, opacity: newOpacity)
+    }
+    init(color: UIColor, opacity: CGFloat) {
+        self.color = color
+        self.opacity = opacity
     }
 }
