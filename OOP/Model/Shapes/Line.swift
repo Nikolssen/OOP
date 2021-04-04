@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Line: Shape{
+class Line: Shape {
     
     
     private let stroke: Stroke
@@ -83,6 +83,11 @@ class Line: Shape{
         
     }
     
+    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+        let line = try container.decode(Line.self, forKey: .data)
+        return line
+    }
+
     required convenience init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.init(stroke: stroke, firstPoint: firstPoint)
     }

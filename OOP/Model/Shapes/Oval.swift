@@ -58,6 +58,10 @@ class Oval: Shape {
     override func className() -> String {
         return "Oval"
     }
+    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+        let oval = try container.decode(Oval.self, forKey: .data)
+        return oval
+    }
     
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

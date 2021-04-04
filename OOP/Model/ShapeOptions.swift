@@ -11,11 +11,8 @@ import UIKit
 class ShapeOptions{
     private(set) static var possibleShapes = ["Line", "Rectangle", "Oval", "Polygon", "Circle", "Trapezium"]
     
-    private(set) var chosenShape: Shape.Type
+    private(set) var chosenShape: Shape.Type = Line.self
     
-    init() {
-        chosenShape = Line.self
-    }
     
     func chooseShape(meta: String) {
         let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String

@@ -8,16 +8,11 @@
 
 import UIKit
 
-class CanvasDatasource: Encodable
+class CanvasDatasource: Codable
 {
     private(set) var shapes = [Shape]()
     private(set) var undoStack = [Shape]()
     
-    enum CodingKeys: String, CodingKey
-    {
-        case type
-        case data
-    }
     
     
     var currentShape: Shape?
@@ -45,34 +40,23 @@ class CanvasDatasource: Encodable
     func resetUndoStack(){
         undoStack.removeAll()
     }
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        for shape in shapes
-        {
-            var shapeContainer = container.nestedContainer(keyedBy: CodingKeys.self)
-            try? shapeContainer.encode(shape.className(), forKey: .type)
-            try? shapeContainer.encode(shape, forKey: .data)
-        }
+    
+    func serialize() -> Data? {
+        let encoder = JSONEncoder()
+        let shapeWrapper = ShapeArrayCoder(shapes: self.shapes)
+        guard let data = try? encoder.encode(shapeWrapper) else {return nil}
+        return data
     }
     
-    convenience required init(from decoder: Decoder) throws {
-        var array = [Shape]()
-        if var container = try? decoder.unkeyedContainer()
-        {
-            
-            let helper = ShapeOptions()
-            while (!container.isAtEnd) {
-                let shapeContainer = try container.nestedContainer(keyedBy: CodingKeys.self)
-                let shapeType = try shapeContainer.decode(String.self, forKey: .type)
-                helper.chooseShape(meta: shapeType)
-                let shape = try shapeContainer.decode(helper.chosenShape, forKey: .data)
-                array.append(shape)
- 
+    func deserialize(_ data: Data) -> Bool{
+        let decoder = JSONDecoder()
+        if let newShapes = try? decoder.decode(ShapeArrayCoder.self, from: data) {
+            if newShapes.shapes != nil
+            {
+                shapes = newShapes.shapes!
+                return true
             }
         }
-        self.init()
-        self.shapes = array
-
+        return false
     }
-    
 }

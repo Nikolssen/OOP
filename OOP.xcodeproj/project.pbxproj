@@ -20,6 +20,9 @@
 		84C047E025FD5A4B006DB895 /* CanvasDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C047DF25FD5A4B006DB895 /* CanvasDatasource.swift */; };
 		84C35AA225FAB58D00BF7021 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C35AA025FAB58D00BF7021 /* MainViewController.swift */; };
 		84C35AA325FAB58D00BF7021 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C35AA125FAB58D00BF7021 /* MainViewController.xib */; };
+		84D343F82619B75F009042D0 /* DeserializeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D343F62619B75F009042D0 /* DeserializeController.swift */; };
+		84D343F92619B75F009042D0 /* DeserializeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D343F72619B75F009042D0 /* DeserializeController.xib */; };
+		84D343FC2619B8F1009042D0 /* ShapeArrayCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D343FB2619B8F1009042D0 /* ShapeArrayCoder.swift */; };
 		84D8B91525FB70E100C98B72 /* DrawOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8B91425FB70E100C98B72 /* DrawOptions.swift */; };
 		84D8B91A25FB730E00C98B72 /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8B91925FB730E00C98B72 /* HexColorExtension.swift */; };
 		84E3483C25EB9452003E7D27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3483B25EB9452003E7D27 /* AppDelegate.swift */; };
@@ -46,6 +49,9 @@
 		84C047DF25FD5A4B006DB895 /* CanvasDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasDatasource.swift; sourceTree = "<group>"; };
 		84C35AA025FAB58D00BF7021 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		84C35AA125FAB58D00BF7021 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		84D343F62619B75F009042D0 /* DeserializeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializeController.swift; sourceTree = "<group>"; };
+		84D343F72619B75F009042D0 /* DeserializeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeserializeController.xib; sourceTree = "<group>"; };
+		84D343FB2619B8F1009042D0 /* ShapeArrayCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeArrayCoder.swift; sourceTree = "<group>"; };
 		84D8B91425FB70E100C98B72 /* DrawOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawOptions.swift; sourceTree = "<group>"; };
 		84D8B91925FB730E00C98B72 /* HexColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
 		84E3483825EB9452003E7D27 /* OOP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OOP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +124,7 @@
 				84D8B91425FB70E100C98B72 /* DrawOptions.swift */,
 				84C047D925FD3532006DB895 /* ShapeOptions.swift */,
 				84C047DF25FD5A4B006DB895 /* CanvasDatasource.swift */,
+				84D343FB2619B8F1009042D0 /* ShapeArrayCoder.swift */,
 				8412385325FE2444002030B1 /* Stroke+Fill.swift */,
 			);
 			path = Model;
@@ -141,6 +148,8 @@
 				8412EDC725FB3DC40016BE43 /* PenViewController.xib */,
 				84F6C13725FCEBB600DA9190 /* ShapeSelectionController.swift */,
 				84021F5E25FCB0F700D77BFC /* PresentationController.swift */,
+				84D343F62619B75F009042D0 /* DeserializeController.swift */,
+				84D343F72619B75F009042D0 /* DeserializeController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -219,6 +228,7 @@
 			files = (
 				8412EDC925FB3DC40016BE43 /* PenViewController.xib in Resources */,
 				84E3484825EB9455003E7D27 /* LaunchScreen.storyboard in Resources */,
+				84D343F92619B75F009042D0 /* DeserializeController.xib in Resources */,
 				84C35AA325FAB58D00BF7021 /* MainViewController.xib in Resources */,
 				84E3484525EB9455003E7D27 /* Assets.xcassets in Resources */,
 			);
@@ -238,12 +248,14 @@
 				8412EDCB25FB437E0016BE43 /* Preview.swift in Sources */,
 				84F6C13825FCEBB600DA9190 /* ShapeSelectionController.swift in Sources */,
 				84E3485225EB9533003E7D27 /* Canvas.swift in Sources */,
+				84D343F82619B75F009042D0 /* DeserializeController.swift in Sources */,
 				84C047DC25FD4FF5006DB895 /* Oval.swift in Sources */,
 				840B7BB426014A6F00FF643D /* Trapezium.swift in Sources */,
 				84021F5F25FCB0F700D77BFC /* PresentationController.swift in Sources */,
 				84FD996025FBB2720058293B /* Rectangle.swift in Sources */,
 				84D8B91525FB70E100C98B72 /* DrawOptions.swift in Sources */,
 				840B7BB22601448F00FF643D /* Circle.swift in Sources */,
+				84D343FC2619B8F1009042D0 /* ShapeArrayCoder.swift in Sources */,
 				84C047DA25FD3532006DB895 /* ShapeOptions.swift in Sources */,
 				84FD995E25FBA34B0058293B /* Line.swift in Sources */,
 				84C35AA225FAB58D00BF7021 /* MainViewController.swift in Sources */,

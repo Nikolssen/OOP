@@ -123,11 +123,12 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func serializeAction(_ sender: UIBarButtonItem) {
-        let encoder = JSONEncoder()
-        guard let data = try? encoder.encode(canvasDatasource) else {return}
+        let data = canvasDatasource.serialize()
+
         canvasDatasource.clear()
         canvas.setNeedsDisplay()
-        sleep(2)
+        if (canvasDatasource.deserialize(data!))
+        {canvas.setNeedsDisplay()}
     }
 }
 

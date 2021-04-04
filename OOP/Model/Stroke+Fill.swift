@@ -55,7 +55,7 @@ struct Stroke: Codable {
         let width = try container.decode(Int.self, forKey: .width)
         self.init(color: color, width: width)
     }
-
+    
 }
 
 struct Fill: Codable {

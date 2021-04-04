@@ -99,6 +99,12 @@ class Trapezium: Shape{
     override func className() -> String {
         return "Trapezium"
     }
+    
+    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+        let trapezium = try container.decode(Trapezium.self, forKey: .data)
+        return trapezium
+    }
+    
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)

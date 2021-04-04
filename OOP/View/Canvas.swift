@@ -21,7 +21,7 @@ class Canvas: UIView {
                 shape.draw(isPrototype: false)
             }
         }
-        if let newShape = datasource!.currentShape {
+        if let newShape = datasource?.currentShape {
             newShape.draw(isPrototype: true)
         }
     }

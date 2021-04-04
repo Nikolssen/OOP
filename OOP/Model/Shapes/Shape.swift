@@ -10,6 +10,12 @@ import UIKit
 
 class Shape:  NSObject, Codable{
     
+    enum ExternalCodingKeys: String, CodingKey
+    {
+        case type
+        case data
+    }
+    
     func draw(isPrototype: Bool)
     {
     //Argument specifies if shape that is to be drawn should be solid or dashed
@@ -39,8 +45,13 @@ class Shape:  NSObject, Codable{
         //Standart init for all shapes in new PanGesture session
     }
     override init() {
-        
+//
     }
+    
+    class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+        fatalError("Incomplete implementation")
+    }
+    
     func encode(to encoder: Encoder) throws {
         fatalError("Incomplete implementation")
     }

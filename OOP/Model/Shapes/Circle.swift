@@ -46,7 +46,12 @@ class Circle: Shape {
     override func className() -> String {
         return "Circle"
     }
-
+    
+    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+        let circle = try container.decode(Circle.self, forKey: .data)
+        return circle
+    }
+    
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)

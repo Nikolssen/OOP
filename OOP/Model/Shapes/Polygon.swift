@@ -72,6 +72,11 @@ class Polygon: Shape{
         try container.encode(points, forKey: .points)
     }
     
+    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+        let polygon = try container.decode(Polygon.self, forKey: .data)
+        return polygon
+    }
+    
     required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         
         self.stroke = stroke
