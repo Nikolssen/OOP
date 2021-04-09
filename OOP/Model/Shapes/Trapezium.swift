@@ -7,18 +7,19 @@
 //
 //
 import UIKit
-class Trapezium: Shape{
+class Trapezium: NSObject, Shape, Codable{
 
     private let stroke: Stroke
     private let fill: Fill
     private var points = [CGPoint]()
+    private var shouldUseHorizontalAxis: Bool?
     
-    enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey{
         case stroke
         case fill
         case points
     }
-    override func draw(isPrototype: Bool) {
+    func draw(isPrototype: Bool) {
         if points.count > 1
         {
             
@@ -46,12 +47,18 @@ class Trapezium: Shape{
         }
     }
     
-    override func replace(point: CGPoint) {
+    func replace(point: CGPoint) {
         let count = points.count
         
         switch count {
+            
         case  2:
-            if !areColinear(points[0], points[1], point){
+            if shouldUseHorizontalAxis == nil
+            {
+                shouldUseHorizontalAxis = horizontalAxis(point1: points[0], point2: points[1])
+            }
+            if !areColinear(points[0], points[1], point)
+            {
                 _ = points.popLast()
                 points.append(point)
             }
@@ -59,8 +66,7 @@ class Trapezium: Shape{
             _ = points.popLast()
             points.append(point)
         case 4:
-            let axis = Axis.changingAxis(point1: points[0], point2: points[1])
-            let newPoint = makeParallel(points[0], points[1], points[2], point, changingAxis: axis)
+            let newPoint = makeParallel(points[0], points[1], points[2], point, shouldUseHorizontalAxis: shouldUseHorizontalAxis!)
             _ = points.popLast()
             points.append(newPoint)
         default:
@@ -74,38 +80,51 @@ class Trapezium: Shape{
         return (point2.y - point1.y)/(point2.x - point1.x) == (point3.y - point1.y)/(point3.x - point1.x)
     }
     
-    private func makeParallel(_ point1: CGPoint, _ point2: CGPoint, _ point3: CGPoint, _ point4: CGPoint, changingAxis: Axis) -> CGPoint {
-        switch changingAxis {
-        case .x:
+    private func makeParallel(_ point1: CGPoint, _ point2: CGPoint, _ point3: CGPoint, _ point4: CGPoint, shouldUseHorizontalAxis: Bool) -> CGPoint {
+        if shouldUseHorizontalAxis
+        {
             let y4: CGFloat = (point2.y - point1.y)*(point4.x - point3.x)/(point2.x - point1.x) + point3.y
             return CGPoint(x: point4.x, y: y4)
-        default:
+        }
+        else
+        {
             let x4 = (point4.y - point3.y)*(point2.x - point1.x)/(point2.y - point1.y) + point3.x
             return CGPoint(x: x4, y: point4.y)
         }
     }
     
-    override func add(point: CGPoint) {
+    func add(point: CGPoint) {
         points.append(point)
         
     }
-    override func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         
         if points.count == 4 {
             return true
         }
         return false
     }
-    override func className() -> String {
+    func className() -> String {
         return "Trapezium"
     }
+    private func horizontalAxis(point1: CGPoint, point2: CGPoint) -> Bool{
+        let deltaX = abs(point1.x - point2.x)
+        let deltaY = abs(point1.y - point2.y)
+        
+        return deltaX >= deltaY
+    }
     
-    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode(self, forKey: .data)
+    }
+    
+    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
         let trapezium = try container.decode(Trapezium.self, forKey: .data)
         return trapezium
     }
     
-    override func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
         try container.encode(fill, forKey: .fill)
@@ -140,20 +159,4 @@ class Trapezium: Shape{
     }
 }
 
-fileprivate enum Axis{
-    case x
-    case y
-    
-    static func changingAxis(point1: CGPoint, point2: CGPoint) -> Axis{
-        let deltaX = abs(point1.x - point2.x)
-        let deltaY = abs(point1.y - point2.y)
-        
-        if deltaX >= deltaY {
-            return .x
-        }
-        else
-        {
-            return .y
-        }
-    }
-}
+

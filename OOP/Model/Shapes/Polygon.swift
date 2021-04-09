@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Polygon: Shape{
+class Polygon: NSObject, Shape, Codable{
     
     
     
@@ -16,12 +16,13 @@ class Polygon: Shape{
     private let fill: Fill
     private var points = [CGPoint]()
     
-    enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey{
         case stroke
         case fill
         case points
     }
-    override func draw(isPrototype: Bool) {
+    
+    func draw(isPrototype: Bool) {
         if points.count > 1
         {
             
@@ -45,34 +46,39 @@ class Polygon: Shape{
         }
     }
     
-    override func add(point: CGPoint) {
+    func add(point: CGPoint) {
         points.append(point)
     }
     
-    override func replace(point: CGPoint) {
+    func replace(point: CGPoint) {
         if (points.count>1) {
             _ = points.popLast()
         }
         points.append(point)
     }
     
-    override func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         if points.count > 2
         {return !afterPanGesture}
         return false
     }
     
-    override func className() -> String {
+    func className() -> String {
         return "Polygon"
     }
-    override func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
         try container.encode(fill, forKey: .fill)
         try container.encode(points, forKey: .points)
     }
     
-    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode(self, forKey: .data)
+    }
+    
+    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
         let polygon = try container.decode(Polygon.self, forKey: .data)
         return polygon
     }

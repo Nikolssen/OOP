@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Oval: Shape {
+class Oval: NSObject, Shape, Codable {
 
     
     let firstAngle: CGPoint
@@ -30,12 +30,12 @@ class Oval: Shape {
     private let stroke: Stroke
     private let fill: Fill
     
-    enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey{
         case stroke
         case fill
         case points
     }
-    override func draw(isPrototype: Bool) {
+    func draw(isPrototype: Bool) {
         if secondAngle != nil {
             let ovalPath = UIBezierPath(ovalIn: CGRect(x: x, y: y, width: width, height: height))
             stroke.color.setStroke()
@@ -51,19 +51,24 @@ class Oval: Shape {
         }}
     
     
-    override func replace(point:CGPoint)  {
+    func replace(point:CGPoint)  {
         secondAngle = point
     }
     
-    override func className() -> String {
+    func className() -> String {
         return "Oval"
     }
-    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode(self, forKey: .data)
+    }
+    
+    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
         let oval = try container.decode(Oval.self, forKey: .data)
         return oval
     }
     
-    override func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
         try container.encode(fill, forKey: .fill)

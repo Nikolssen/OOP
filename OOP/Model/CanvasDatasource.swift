@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CanvasDatasource: Codable
+class CanvasDatasource
 {
     private(set) var shapes = [Shape]()
     private(set) var undoStack = [Shape]()

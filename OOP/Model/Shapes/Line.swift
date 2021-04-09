@@ -8,17 +8,19 @@
 
 import UIKit
 
-class Line: Shape {
+class Line: NSObject, Shape, Codable{
+
+    
     
     
     private let stroke: Stroke
     private var points = [CGPoint]()
     
-    enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey{
         case stroke
         case points
     }
-    override func draw(isPrototype: Bool) {
+    func draw(isPrototype: Bool) {
         
         if points.count > 1
         {
@@ -39,16 +41,16 @@ class Line: Shape {
             
         }
     }
-    override func className() -> String {
+    func className() -> String {
         return "Line"
     }
     
-    override func add(point: CGPoint) {
+    func add(point: CGPoint) {
         
         points.append(point)
     }
     
-    override func replace(point:CGPoint)  {
+    func replace(point:CGPoint)  {
         
         if (points.count>1) {
             _ = points.popLast()
@@ -56,11 +58,13 @@ class Line: Shape {
         points.append(point)
     }
     
-    override func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         return !afterPanGesture
     }
     
-    override func encode(to encoder: Encoder) throws {
+
+    
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
         try container.encode(points, forKey: .points)
@@ -80,10 +84,14 @@ class Line: Shape {
         else {
             return nil
         }
-        
     }
     
-    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode(self, forKey: .data)
+    }
+    
+    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
         let line = try container.decode(Line.self, forKey: .data)
         return line
     }

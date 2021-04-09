@@ -8,11 +8,11 @@
 
 import UIKit
 
-class Rectangle: Shape{
+class Rectangle: NSObject, Shape, Codable{
     
     
-    let firstAngle: CGPoint
-    var secondAngle: CGPoint?
+    private let firstAngle: CGPoint
+    private var secondAngle: CGPoint?
     var height: CGFloat {get{
         return abs(firstAngle.y - (secondAngle?.y ?? firstAngle.y))
         }}
@@ -29,13 +29,13 @@ class Rectangle: Shape{
     private let stroke: Stroke
     private let fill: Fill
     
-    enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey{
         case stroke
         case fill
         case points
     }
     
-    override func draw(isPrototype: Bool) {
+    func draw(isPrototype: Bool) {
         if secondAngle != nil {
             
             let rectanglePath = UIBezierPath(rect: CGRect(x: x, y: y, width: width, height: height))
@@ -53,19 +53,23 @@ class Rectangle: Shape{
     }
     
     
-    override func replace(point:CGPoint)  {
+    func replace(point:CGPoint)  {
         secondAngle = point
     }
-    override func className() -> String {
+    func className() -> String {
         return "Rectangle"
     }
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode(self, forKey: .data)
+    }
     
-    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
         let rectangle = try container.decode(Rectangle.self, forKey: .data)
         return rectangle
     }
     
-    override func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
         try container.encode(fill, forKey: .fill)

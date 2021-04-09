@@ -8,58 +8,32 @@
 
 import UIKit
 
-class Shape:  NSObject, Codable{
+protocol Shape:  NSObject{
     
-    enum ExternalCodingKeys: String, CodingKey
-    {
-        case type
-        case data
-    }
+
     
     func draw(isPrototype: Bool)
-    {
-    //Argument specifies if shape that is to be drawn should be solid or dashed
-        fatalError("Incomplete implementation")
-    }
-
     func replace(point:CGPoint)
-    {
-    //Replaces the last point or creates new
-        fatalError("Incomplete implementation")
-    }
-    
+    func add(point: CGPoint)
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool
+    func className() -> String
+    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint)
+    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws
+}
+extension Shape{
     func add(point: CGPoint){
-    //Implement this method if you deal with complex shape
+        
     }
     
-    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool{
-        //Implement this method if you need more than one PanGesture session
+    func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         return true
     }
-    
-    func className() -> String{
-        fatalError("Incomplete implementation")
-    }
-    
-    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint){
-        //Standart init for all shapes in new PanGesture session
-    }
-    override init() {
-//
-    }
-    
-    class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
-        fatalError("Incomplete implementation")
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        fatalError("Incomplete implementation")
-    }
-    
-    required init(from decoder: Decoder) throws {
-        fatalError("Incomplete implementation")
-    }
-    
 }
 
+enum ShapeExternalCodingKeys: String, CodingKey
+{
+    case type
+    case data
+}
 

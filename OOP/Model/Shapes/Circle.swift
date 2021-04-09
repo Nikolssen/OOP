@@ -8,20 +8,22 @@
 
 import UIKit
 
-class Circle: Shape {
+class Circle: NSObject, Shape, Codable {
+
     
-    var radius: CGFloat?
-    let center: CGPoint
+    
+    private var radius: CGFloat?
+    private let center: CGPoint
     private let stroke: Stroke
     private let fill: Fill
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case stroke
         case fill
         case radius
         case center
     }
-    override func draw(isPrototype: Bool) {
+    func draw(isPrototype: Bool) {
         if radius != nil {
             let ovalPath = UIBezierPath(arcCenter: center, radius: radius!, startAngle: 0, endAngle: (CGFloat.pi * 2), clockwise: true)
             stroke.color.setStroke()
@@ -37,22 +39,26 @@ class Circle: Shape {
         }
     }
     
-    override func replace(point: CGPoint) {
+    func replace(point: CGPoint) {
         let x = center.x - point.x
         let y = center.y - point.y
         radius = sqrt(x*x + y*y)
     }
     
-    override func className() -> String {
+   func className() -> String {
         return "Circle"
     }
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode(self, forKey: .data)
+    }
     
-    override class func makeShape(from container: KeyedDecodingContainer<Shape.ExternalCodingKeys>) throws -> Shape {
+   static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
         let circle = try container.decode(Circle.self, forKey: .data)
         return circle
     }
     
-    override func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
         try container.encode(fill, forKey: .fill)

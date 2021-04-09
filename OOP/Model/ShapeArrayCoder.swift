@@ -20,9 +20,9 @@ class ShapeArrayCoder: Codable {
         var container = encoder.unkeyedContainer()
         for shape in self.shapes!
         {
-            var shapeContainer = container.nestedContainer(keyedBy: Shape.ExternalCodingKeys.self)
+            var shapeContainer = container.nestedContainer(keyedBy: ShapeExternalCodingKeys.self)
             try? shapeContainer.encode(shape.className(), forKey: .type)
-            try? shapeContainer.encode(shape, forKey: .data)
+            try? shape.encodeShape(in: shapeContainer)
         }
     }
     
@@ -33,7 +33,7 @@ class ShapeArrayCoder: Codable {
             let helper = ShapeOptions()
             while (!container.isAtEnd) {
                 do{
-                let shapeContainer = try container.nestedContainer(keyedBy: Shape.ExternalCodingKeys.self)
+                let shapeContainer = try container.nestedContainer(keyedBy: ShapeExternalCodingKeys.self)
                 let shapeTypeString = try shapeContainer.decode(String.self, forKey: .type)
                 helper.chooseShape(meta: shapeTypeString)
                 let metaType = helper.chosenShape
