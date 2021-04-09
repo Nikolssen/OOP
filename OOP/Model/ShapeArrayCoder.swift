@@ -32,12 +32,15 @@ class ShapeArrayCoder: Codable {
         {
             let helper = ShapeOptions()
             while (!container.isAtEnd) {
+                do{
                 let shapeContainer = try container.nestedContainer(keyedBy: Shape.ExternalCodingKeys.self)
                 let shapeTypeString = try shapeContainer.decode(String.self, forKey: .type)
                 helper.chooseShape(meta: shapeTypeString)
                 let metaType = helper.chosenShape
                 let shape = try metaType.makeShape(from: shapeContainer)
-                shapes.append(shape)
+                    shapes.append(shape)
+                }
+                catch {continue}
             }
         }
         self.shapes = shapes

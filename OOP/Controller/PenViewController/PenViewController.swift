@@ -107,11 +107,9 @@ class PenViewController: UIViewController, Presentable {
         configure()
     }
     
-    func configure()  {
-        modalPresentationStyle = .custom
-        transitioningDelegate = customTransitionDelegate
-    }
     @IBAction func swipedDown(_ sender: UISwipeGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
+
 }
+

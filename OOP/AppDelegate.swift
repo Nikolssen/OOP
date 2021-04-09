@@ -16,8 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let mainWindow = UIWindow(frame: UIScreen.main.bounds)
-        let rootViewController = MainViewController(nibName: "MainViewController", bundle: nil)
+        let mainVC = MainViewController(nibName: "MainViewController", bundle: nil)
+        let rootViewController = UINavigationController(rootViewController: mainVC)
+        rootViewController.navigationBar.tintColor = UIColor(red: 255, green: 144, blue: 45)
+        rootViewController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "LabelColorAsset")!]
         mainWindow.rootViewController = rootViewController
+        rootViewController.navigationBar.alpha = 1.0
+        rootViewController.navigationBar.backgroundColor = UIColor.white
+        rootViewController.navigationBar.isHidden = true
         window = mainWindow
         window?.makeKeyAndVisible()
         

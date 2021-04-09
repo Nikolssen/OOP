@@ -12,6 +12,13 @@ protocol Presentable: UIViewController {
     var customTransitionDelegate: ModalDelegate {get}
 }
 
+extension Presentable{
+    func configure()  {
+        modalPresentationStyle = .custom
+        transitioningDelegate = customTransitionDelegate
+    }
+}
+
 class ModalDelegate: NSObject, UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return PresentationController(presentedViewController: presented, presenting: presenting)

@@ -40,23 +40,9 @@ class CanvasDatasource: Codable
     func resetUndoStack(){
         undoStack.removeAll()
     }
-    
-    func serialize() -> Data? {
-        let encoder = JSONEncoder()
-        let shapeWrapper = ShapeArrayCoder(shapes: self.shapes)
-        guard let data = try? encoder.encode(shapeWrapper) else {return nil}
-        return data
-    }
-    
-    func deserialize(_ data: Data) -> Bool{
-        let decoder = JSONDecoder()
-        if let newShapes = try? decoder.decode(ShapeArrayCoder.self, from: data) {
-            if newShapes.shapes != nil
-            {
-                shapes = newShapes.shapes!
-                return true
-            }
-        }
-        return false
+
+    func setShapes(shapes: [Shape]){
+        self.shapes = shapes
+        self.undoStack.removeAll()
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class ShapeSelectionController: UITableViewController, Presentable {
     
-    weak var options: ShapeOptions!
+    weak var options: ShapeOptions?
     var swipeGestureRecognizer: UISwipeGestureRecognizer!
     let customTransitionDelegate = ModalDelegate()
     
@@ -58,7 +58,7 @@ class ShapeSelectionController: UITableViewController, Presentable {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        options.chooseShape(meta: ShapeOptions.possibleShapes[indexPath.row])
+        options?.chooseShape(meta: ShapeOptions.possibleShapes[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
     
@@ -72,14 +72,10 @@ class ShapeSelectionController: UITableViewController, Presentable {
         configure()
     }
     
-    func configure()  {
-        modalPresentationStyle = .custom
-        transitioningDelegate = customTransitionDelegate
-    }
     
     @objc func swipedDown(sender: UISwipeGestureRecognizer){
         dismiss(animated: true, completion: nil)
     }
-
     
 }
+

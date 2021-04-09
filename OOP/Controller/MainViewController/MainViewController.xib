@@ -65,11 +65,14 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="N0s-y2-9SQ"/>
-                        <barButtonItem enabled="NO" title="Item" image="square.and.arrow.down" catalog="system" id="M4S-xe-sip">
+                        <barButtonItem title="Item" image="arrow.down.doc" catalog="system" id="M4S-xe-sip">
                             <color key="tintColor" red="1" green="0.56078431370000004" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="deserializeAction:" destination="-1" id="wat-s7-y3G"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="0az-U8-ZtO"/>
-                        <barButtonItem title="Item" image="square.and.arrow.up" catalog="system" id="H9n-cn-hpD">
+                        <barButtonItem title="Item" image="arrow.up.doc" catalog="system" springLoaded="YES" id="H9n-cn-hpD">
                             <connections>
                                 <action selector="serializeAction:" destination="-1" id="Qd4-MZ-xUy"/>
                             </connections>
@@ -103,13 +106,13 @@
         </pongPressGestureRecognizer>
     </objects>
     <resources>
+        <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
+        <image name="arrow.up.doc" catalog="system" width="115" height="128"/>
         <image name="arrowshape.turn.up.left" catalog="system" width="128" height="106"/>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
         <image name="clear" catalog="system" width="128" height="114"/>
         <image name="hexagon" catalog="system" width="128" height="124"/>
         <image name="pencil.tip" catalog="system" width="99" height="128"/>
-        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

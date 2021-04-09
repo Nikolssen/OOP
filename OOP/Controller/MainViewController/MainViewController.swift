@@ -113,22 +113,25 @@ class MainViewController: UIViewController {
             }
         }
     }
-    override func didReceiveMemoryWarning() {
-        canvasDatasource.clear()
-        canvasDatasource.currentShape = nil
-        canvasDatasource.resetUndoStack()
-        redoButton.isEnabled = false
-        undoButton.isEnabled = false
-        canvas.setNeedsDisplay()
+
+    @IBAction func serializeAction(_ sender: UIBarButtonItem) {
+        if canvasDatasource.currentShape != nil{
+            canvasDatasource.currentShape = nil
+            canvas.setNeedsDisplay()
+        }
+        
+        let saveVC = SaveController(nibName: "SaveController", bundle: nil)
+        saveVC.delegate = self
+        present(saveVC, animated: true, completion: nil)
+    }
+    @IBAction func deserializeAction(_ sender: UIBarButtonItem) {
+        let loadVC = LoadViewController()
+        loadVC.delegate = self
+        navigationController?.pushViewController(loadVC, animated: true)
     }
     
-    @IBAction func serializeAction(_ sender: UIBarButtonItem) {
-        let data = canvasDatasource.serialize()
-
-        canvasDatasource.clear()
-        canvas.setNeedsDisplay()
-        if (canvasDatasource.deserialize(data!))
-        {canvas.setNeedsDisplay()}
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
 }
 
