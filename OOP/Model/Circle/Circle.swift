@@ -9,8 +9,6 @@
 import UIKit
 
 class Circle: NSObject, Shape, Codable {
-
-    
     
     private var radius: CGFloat?
     private let center: CGPoint
@@ -23,6 +21,7 @@ class Circle: NSObject, Shape, Codable {
         case radius
         case center
     }
+    
     func draw(isPrototype: Bool) {
         if radius != nil {
             let ovalPath = UIBezierPath(arcCenter: center, radius: radius!, startAngle: 0, endAngle: (CGFloat.pi * 2), clockwise: true)
@@ -44,20 +43,13 @@ class Circle: NSObject, Shape, Codable {
         let y = center.y - point.y
         radius = sqrt(x*x + y*y)
     }
-    
-   func className() -> String {
-        return "Circle"
-    }
+
     func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
         var encoder = container
+        try encoder.encode("Circle", forKey: .type)
         try encoder.encode(self, forKey: .data)
     }
-    
-   static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
-        let circle = try container.decode(Circle.self, forKey: .data)
-        return circle
-    }
-    
+        
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
@@ -66,17 +58,13 @@ class Circle: NSObject, Shape, Codable {
         try container.encode(center, forKey: .center)
     }
     
-    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
+    init(stroke: Stroke, fill: Fill, center: CGPoint, radius: CGFloat?)
+    {
         self.stroke = stroke
         self.fill = fill
-        self.center = firstPoint
-        super.init()
-    }
-    
-    convenience init(stroke: Stroke, fill: Fill, center: CGPoint, radius: CGFloat)
-    {
-        self.init(stroke:stroke, fill: fill, firstPoint: center)
+        self.center = center
         self.radius = radius
+        super.init()
     }
     
     convenience required init(from decoder: Decoder) throws {

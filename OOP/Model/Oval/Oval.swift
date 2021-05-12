@@ -54,19 +54,13 @@ class Oval: NSObject, Shape, Codable {
     func replace(point:CGPoint)  {
         secondAngle = point
     }
-    
-    func className() -> String {
-        return "Oval"
-    }
+
     func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
         var encoder = container
+        try encoder.encode("Oval", forKey: .type)
         try encoder.encode(self, forKey: .data)
     }
     
-    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
-        let oval = try container.decode(Oval.self, forKey: .data)
-        return oval
-    }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -75,15 +69,13 @@ class Oval: NSObject, Shape, Codable {
         try container.encode([firstAngle, secondAngle!], forKey: .points)
     }
     
-    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
+
+    
+    init(stroke: Stroke, fill: Fill, firstAngle: CGPoint, secondAngle: CGPoint? = nil) {
         self.stroke = stroke
         self.fill = fill
-        self.firstAngle = firstPoint
-        super.init()
-    }
-    
-    convenience init(stroke: Stroke, fill: Fill, firstAngle: CGPoint, secondAngle: CGPoint) {
-        self.init(stroke: stroke, fill: fill, firstPoint: firstAngle)
+        self.firstAngle = firstAngle
+        self.secondAngle = secondAngle
         self.secondAngle = secondAngle
 
     }

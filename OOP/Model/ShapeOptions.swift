@@ -9,23 +9,33 @@
 import UIKit
 
 class ShapeOptions{
-    private(set) static var possibleShapes = ["Line", "Rectangle", "Oval", "Polygon", "Circle", "Trapezium"]
+    private(set) static var availableCreators: [ShapeCreator] = [LineCreator(), PolygonCreator(), RectangleCreator(), OvalCreator(), CircleCreator(), TrapeziumCreator()]
     
-    private(set) var chosenShape: Shape.Type = Line.self
+    private(set) var creator: ShapeCreator = availableCreators.first!
     
     
-    func chooseShape(meta: String) {
-        let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String
-        guard let metaType = NSClassFromString(appName + "." + meta) as? Shape.Type else { return }
-        chosenShape = metaType
+    func chooseShape(at index: Int) {
+        if index < ShapeOptions.availableCreators.count && index >= 0 {
+            creator = ShapeOptions.availableCreators[index]
+        }
+    }
+    
+    func chooseShape(by name: String) {
+        for shapeCreator in ShapeOptions.availableCreators {
+            if name == shapeCreator.shapeName() {
+                creator = shapeCreator
+                break
+            }
+        }
+        creator = ShapeOptions.availableCreators[1] //Define Polygonal Behaviour in case of smth unusual
     }
     
 //    static func addShape(meta: String) {
 //        let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String
 //        guard let metaType = NSClassFromString(appName + "." + meta) as? Line.Type else { return }
-//        if !possibleShapes.contains(meta)
+//        if !availableCreators.contains(meta)
 //        {
-//            possibleShapes .append(meta)
+//            availableCreators .append(meta)
 //        }
 //    }
 //

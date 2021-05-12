@@ -63,9 +63,14 @@ class Polygon: NSObject, Shape, Codable{
         return false
     }
     
-    func className() -> String {
-        return "Polygon"
+
+    
+    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
+        var encoder = container
+        try encoder.encode("Polygon", forKey: .type)
+        try encoder.encode(self, forKey: .data)
     }
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(stroke, forKey: .stroke)
@@ -73,17 +78,7 @@ class Polygon: NSObject, Shape, Codable{
         try container.encode(points, forKey: .points)
     }
     
-    func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
-        var encoder = container
-        try encoder.encode(self, forKey: .data)
-    }
-    
-    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
-        let polygon = try container.decode(Polygon.self, forKey: .data)
-        return polygon
-    }
-    
-    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
+    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         
         self.stroke = stroke
         self.fill = fill

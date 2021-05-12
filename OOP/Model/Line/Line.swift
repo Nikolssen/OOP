@@ -10,9 +10,6 @@ import UIKit
 
 class Line: NSObject, Shape, Codable{
 
-    
-    
-    
     private let stroke: Stroke
     private var points = [CGPoint]()
     
@@ -20,6 +17,7 @@ class Line: NSObject, Shape, Codable{
         case stroke
         case points
     }
+    
     func draw(isPrototype: Bool) {
         
         if points.count > 1
@@ -41,9 +39,7 @@ class Line: NSObject, Shape, Codable{
             
         }
     }
-    func className() -> String {
-        return "Line"
-    }
+    
     
     func add(point: CGPoint) {
         
@@ -61,8 +57,6 @@ class Line: NSObject, Shape, Codable{
     func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {
         return !afterPanGesture
     }
-    
-
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -88,16 +82,8 @@ class Line: NSObject, Shape, Codable{
     
     func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
         var encoder = container
+        try encoder.encode("Line", forKey: .type)
         try encoder.encode(self, forKey: .data)
-    }
-    
-    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
-        let line = try container.decode(Line.self, forKey: .data)
-        return line
-    }
-
-    required convenience init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
-        self.init(stroke: stroke, firstPoint: firstPoint)
     }
     
     required convenience init(from decoder: Decoder) throws {

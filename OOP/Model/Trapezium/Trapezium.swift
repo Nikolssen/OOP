@@ -104,9 +104,7 @@ class Trapezium: NSObject, Shape, Codable{
         }
         return false
     }
-    func className() -> String {
-        return "Trapezium"
-    }
+
     private func horizontalAxis(point1: CGPoint, point2: CGPoint) -> Bool{
         let deltaX = abs(point1.x - point2.x)
         let deltaY = abs(point1.y - point2.y)
@@ -116,12 +114,8 @@ class Trapezium: NSObject, Shape, Codable{
     
     func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
         var encoder = container
+        try encoder.encode("Trapezium", forKey: .type)
         try encoder.encode(self, forKey: .data)
-    }
-    
-    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape {
-        let trapezium = try container.decode(Trapezium.self, forKey: .data)
-        return trapezium
     }
     
     func encode(to encoder: Encoder) throws {
@@ -131,7 +125,7 @@ class Trapezium: NSObject, Shape, Codable{
         try container.encode(points, forKey: .points)
     }
     
-    required init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
+    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint) {
         self.stroke = stroke
         self.fill = fill
         self.points.append(firstPoint)

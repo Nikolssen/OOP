@@ -10,20 +10,14 @@ import UIKit
 
 protocol Shape:  NSObject{
     
-
-    
     func draw(isPrototype: Bool)
     func replace(point:CGPoint)
     func add(point: CGPoint)
     func canFinalizeDrawing(afterPanGesture: Bool) -> Bool
-    func className() -> String
-    init(stroke: Stroke, fill: Fill, firstPoint: CGPoint)
-    static func makeShape(from container: KeyedDecodingContainer<ShapeExternalCodingKeys>) throws -> Shape
     func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws
 }
 extension Shape{
     func add(point: CGPoint){
-        
     }
     
     func canFinalizeDrawing(afterPanGesture: Bool) -> Bool {

@@ -34,11 +34,10 @@ class ShapeSelectionController: UITableViewController, Presentable {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ShapeOptions.possibleShapes.count
+        return ShapeOptions.availableCreators.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     
@@ -51,14 +50,14 @@ class ShapeSelectionController: UITableViewController, Presentable {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "shapeCell", for: indexPath)
-        let textData = ShapeOptions.possibleShapes[indexPath.row]
+        let textData = ShapeOptions.availableCreators[indexPath.row].shapeName()
         cell.textLabel?.textColor = UIColor(named: "LabelColorAsset")
         cell.textLabel?.text = textData
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        options?.chooseShape(meta: ShapeOptions.possibleShapes[indexPath.row])
+        options?.chooseShape(at: indexPath.row)
         dismiss(animated: true, completion: nil)
     }
     

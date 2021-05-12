@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8401E0D2264310CD003936B7 /* ShapeCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0D1264310CD003936B7 /* ShapeCreator.swift */; };
+		8401E0D5264313A5003936B7 /* LineCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0D4264313A5003936B7 /* LineCreator.swift */; };
+		8401E0D92643146A003936B7 /* PolygonCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0D82643146A003936B7 /* PolygonCreator.swift */; };
+		8401E0DC26431516003936B7 /* RectangleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0DB26431516003936B7 /* RectangleCreator.swift */; };
+		8401E0DF26431592003936B7 /* OvalCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0DE26431592003936B7 /* OvalCreator.swift */; };
+		8401E0E326431688003936B7 /* CircleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0E226431688003936B7 /* CircleCreator.swift */; };
+		8401E0E6264316F0003936B7 /* TrapeziumCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401E0E5264316F0003936B7 /* TrapeziumCreator.swift */; };
 		84021F5F25FCB0F700D77BFC /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84021F5E25FCB0F700D77BFC /* PresentationController.swift */; };
 		840B7BB22601448F00FF643D /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B7BB12601448F00FF643D /* Circle.swift */; };
 		840B7BB426014A6F00FF643D /* Trapezium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B7BB326014A6F00FF643D /* Trapezium.swift */; };
@@ -41,6 +48,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8401E0D1264310CD003936B7 /* ShapeCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeCreator.swift; sourceTree = "<group>"; };
+		8401E0D4264313A5003936B7 /* LineCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineCreator.swift; sourceTree = "<group>"; };
+		8401E0D82643146A003936B7 /* PolygonCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonCreator.swift; sourceTree = "<group>"; };
+		8401E0DB26431516003936B7 /* RectangleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleCreator.swift; sourceTree = "<group>"; };
+		8401E0DE26431592003936B7 /* OvalCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalCreator.swift; sourceTree = "<group>"; };
+		8401E0E226431688003936B7 /* CircleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCreator.swift; sourceTree = "<group>"; };
+		8401E0E5264316F0003936B7 /* TrapeziumCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrapeziumCreator.swift; sourceTree = "<group>"; };
 		84021F5E25FCB0F700D77BFC /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		840B7BB12601448F00FF643D /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		840B7BB326014A6F00FF643D /* Trapezium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapezium.swift; sourceTree = "<group>"; };
@@ -87,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8401E0E1264315EF003936B7 /* ShapeCreators */ = {
+			isa = PBXGroup;
+			children = (
+				8401E0D1264310CD003936B7 /* ShapeCreator.swift */,
+			);
+			path = ShapeCreators;
+			sourceTree = "<group>";
+		};
 		84D029B0262085C000F56CDE /* PenViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +125,60 @@
 				84F623DB2619EED1000F44F6 /* SaveController.xib */,
 			);
 			path = SaveController;
+			sourceTree = "<group>";
+		};
+		84D137DF2646969E00297219 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				84FD995D25FBA34B0058293B /* Line.swift */,
+				8401E0D4264313A5003936B7 /* LineCreator.swift */,
+			);
+			path = Line;
+			sourceTree = "<group>";
+		};
+		84D137E0264696BA00297219 /* Polygon */ = {
+			isa = PBXGroup;
+			children = (
+				84C047DD25FD5532006DB895 /* Polygon.swift */,
+				8401E0D82643146A003936B7 /* PolygonCreator.swift */,
+			);
+			path = Polygon;
+			sourceTree = "<group>";
+		};
+		84D137E1264696CA00297219 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				840B7BB12601448F00FF643D /* Circle.swift */,
+				8401E0E226431688003936B7 /* CircleCreator.swift */,
+			);
+			path = Circle;
+			sourceTree = "<group>";
+		};
+		84D137E2264696E400297219 /* Oval */ = {
+			isa = PBXGroup;
+			children = (
+				84C047DB25FD4FF5006DB895 /* Oval.swift */,
+				8401E0DE26431592003936B7 /* OvalCreator.swift */,
+			);
+			path = Oval;
+			sourceTree = "<group>";
+		};
+		84D137E32646970200297219 /* Rectangle */ = {
+			isa = PBXGroup;
+			children = (
+				84FD995F25FBB2720058293B /* Rectangle.swift */,
+				8401E0DB26431516003936B7 /* RectangleCreator.swift */,
+			);
+			path = Rectangle;
+			sourceTree = "<group>";
+		};
+		84D137E42646978000297219 /* Trapezium */ = {
+			isa = PBXGroup;
+			children = (
+				840B7BB326014A6F00FF643D /* Trapezium.swift */,
+				8401E0E5264316F0003936B7 /* TrapeziumCreator.swift */,
+			);
+			path = Trapezium;
 			sourceTree = "<group>";
 		};
 		84D8B91625FB72A600C98B72 /* Extension */ = {
@@ -158,6 +234,13 @@
 		84E5BCDA25FA4D6B00702014 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84D137E42646978000297219 /* Trapezium */,
+				84D137E32646970200297219 /* Rectangle */,
+				84D137E2264696E400297219 /* Oval */,
+				84D137E1264696CA00297219 /* Circle */,
+				84D137E0264696BA00297219 /* Polygon */,
+				84D137DF2646969E00297219 /* Line */,
+				8401E0E1264315EF003936B7 /* ShapeCreators */,
 				84E5BCDD25FA830400702014 /* Shapes */,
 				84D8B91425FB70E100C98B72 /* DrawOptions.swift */,
 				84C047D925FD3532006DB895 /* ShapeOptions.swift */,
@@ -196,12 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				84FD995B25FBA1E90058293B /* Shape.swift */,
-				84FD995D25FBA34B0058293B /* Line.swift */,
-				84C047DD25FD5532006DB895 /* Polygon.swift */,
-				840B7BB326014A6F00FF643D /* Trapezium.swift */,
-				84FD995F25FBB2720058293B /* Rectangle.swift */,
-				84C047DB25FD4FF5006DB895 /* Oval.swift */,
-				840B7BB12601448F00FF643D /* Circle.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -291,19 +368,24 @@
 			files = (
 				84C047DE25FD5532006DB895 /* Polygon.swift in Sources */,
 				8412EDC825FB3DC40016BE43 /* PenViewController.swift in Sources */,
+				8401E0E6264316F0003936B7 /* TrapeziumCreator.swift in Sources */,
 				84E3483C25EB9452003E7D27 /* AppDelegate.swift in Sources */,
+				8401E0DC26431516003936B7 /* RectangleCreator.swift in Sources */,
 				84D8B91A25FB730E00C98B72 /* HexColorExtension.swift in Sources */,
 				84D029AC26206D5600F56CDE /* LoadViewController.swift in Sources */,
 				8412EDCB25FB437E0016BE43 /* Preview.swift in Sources */,
 				84F6C13825FCEBB600DA9190 /* ShapeSelectionController.swift in Sources */,
+				8401E0DF26431592003936B7 /* OvalCreator.swift in Sources */,
 				84E3485225EB9533003E7D27 /* Canvas.swift in Sources */,
 				84C047DC25FD4FF5006DB895 /* Oval.swift in Sources */,
 				840B7BB426014A6F00FF643D /* Trapezium.swift in Sources */,
 				84021F5F25FCB0F700D77BFC /* PresentationController.swift in Sources */,
 				84FD996025FBB2720058293B /* Rectangle.swift in Sources */,
 				84FC8D2B261FB82D00303C68 /* TextController.swift in Sources */,
+				8401E0D5264313A5003936B7 /* LineCreator.swift in Sources */,
 				84D8B91525FB70E100C98B72 /* DrawOptions.swift in Sources */,
 				84E7E058261F7B5800B3C357 /* FileTableViewCell.swift in Sources */,
+				8401E0E326431688003936B7 /* CircleCreator.swift in Sources */,
 				840B7BB22601448F00FF643D /* Circle.swift in Sources */,
 				84DA0A9E261E269B00A121CF /* MainViewControllerExtension.swift in Sources */,
 				84D343FC2619B8F1009042D0 /* ShapeArrayCoder.swift in Sources */,
@@ -311,9 +393,11 @@
 				84FD995E25FBA34B0058293B /* Line.swift in Sources */,
 				84C35AA225FAB58D00BF7021 /* MainViewController.swift in Sources */,
 				84FD995C25FBA1E90058293B /* Shape.swift in Sources */,
+				8401E0D2264310CD003936B7 /* ShapeCreator.swift in Sources */,
 				8412385425FE2444002030B1 /* Stroke+Fill.swift in Sources */,
 				84F623DC2619EED1000F44F6 /* SaveController.swift in Sources */,
 				84C047E025FD5A4B006DB895 /* CanvasDatasource.swift in Sources */,
+				8401E0D92643146A003936B7 /* PolygonCreator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

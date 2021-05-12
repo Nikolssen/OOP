@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
             }
             else
             {
-                canvasDatasource.currentShape = shapeOptions.chosenShape.init(stroke: drawOptions.stroke, fill: drawOptions.fill, firstPoint: sender.location(in: self.canvas))
+                canvasDatasource.currentShape = shapeOptions.creator.shape(stroke: drawOptions.stroke, fill: drawOptions.fill, firstPoint: sender.location(in: self.canvas))
             }
         case .changed:
             canvasDatasource.currentShape!.replace(point: sender.location(in: self.canvas))
