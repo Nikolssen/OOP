@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Circle: NSObject, Shape, Codable {
+class Circle: Shape, Codable {
     
     private var radius: CGFloat?
     private let center: CGPoint
@@ -64,7 +64,6 @@ class Circle: NSObject, Shape, Codable {
         self.fill = fill
         self.center = center
         self.radius = radius
-        super.init()
     }
     
     convenience required init(from decoder: Decoder) throws {

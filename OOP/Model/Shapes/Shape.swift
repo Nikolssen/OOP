@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol Shape:  NSObject{
+protocol Shape {
     
     func draw(isPrototype: Bool)
     func replace(point:CGPoint)
@@ -29,5 +29,10 @@ enum ShapeExternalCodingKeys: String, CodingKey
 {
     case type
     case data
+}
+
+enum ShapeDecodingError: Error
+{
+    case invalidPointsNumber
 }
 

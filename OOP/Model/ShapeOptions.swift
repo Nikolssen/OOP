@@ -21,23 +21,12 @@ class ShapeOptions{
     }
     
     func chooseShape(by name: String) {
+        creator = ShapeOptions.availableCreators[1]
         for shapeCreator in ShapeOptions.availableCreators {
             if name == shapeCreator.shapeName() {
                 creator = shapeCreator
                 break
             }
         }
-        creator = ShapeOptions.availableCreators[1] //Define Polygonal Behaviour in case of smth unusual
     }
-    
-//    static func addShape(meta: String) {
-//        let appName = Bundle.main.infoDictionary!["CFBundleName"] as! String
-//        guard let metaType = NSClassFromString(appName + "." + meta) as? Line.Type else { return }
-//        if !availableCreators.contains(meta)
-//        {
-//            availableCreators .append(meta)
-//        }
-//    }
-//
-    
 }

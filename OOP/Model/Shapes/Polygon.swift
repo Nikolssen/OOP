@@ -8,9 +8,7 @@
 
 import UIKit
 
-class Polygon: NSObject, Shape, Codable{
-    
-    
+class Polygon: Shape, Codable{
     
     private let stroke: Stroke
     private let fill: Fill
@@ -83,24 +81,23 @@ class Polygon: NSObject, Shape, Codable{
         self.stroke = stroke
         self.fill = fill
         self.points.append(firstPoint)
-        super.init()
     }
     
-    convenience init?(stroke: Stroke, fill: Fill, points: [CGPoint]) {
-        if let point = points.first {
-            self.init(stroke: stroke, fill: fill, firstPoint: point)
-            self.points = points
+    init(stroke: Stroke, fill: Fill, points: [CGPoint]) {
+        self.stroke = stroke
+        self.fill = fill
+        self.points = points
         }
-        else {
-            return nil
-        }
-    }
     
     required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let points = try container.decode([CGPoint].self, forKey: .points)
+        if points.count < 2
+        {
+            throw ShapeDecodingError.invalidPointsNumber
+        }
         let stroke = try container.decode(Stroke.self, forKey: .stroke)
         let fill = try container.decode(Fill.self, forKey: .fill)
-        self.init(stroke: stroke, fill: fill, points: points)!
+        self.init(stroke: stroke, fill: fill, points: points)
     }
 }

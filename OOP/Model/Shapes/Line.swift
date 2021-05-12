@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Line: NSObject, Shape, Codable{
+class Line: Shape, Codable{
 
     private let stroke: Stroke
     private var points = [CGPoint]()
@@ -67,17 +67,11 @@ class Line: NSObject, Shape, Codable{
     init(stroke: Stroke, firstPoint: CGPoint) {
         self.stroke = stroke
         points.append(firstPoint)
-        super.init()
     }
     
-    convenience init?(stroke: Stroke, points: [CGPoint]) {
-        if let point = points.first {
-            self.init(stroke: stroke, firstPoint: point)
-            self.points = points
-        }
-        else {
-            return nil
-        }
+    init(stroke: Stroke, points: [CGPoint]) {
+        self.stroke = stroke
+        self.points = points
     }
     
     func encodeShape(in container: KeyedEncodingContainer<ShapeExternalCodingKeys>) throws {
@@ -90,8 +84,11 @@ class Line: NSObject, Shape, Codable{
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let stroke = try container.decode(Stroke.self, forKey: .stroke)
         let points = try container.decode([CGPoint].self, forKey: .points)
-        self.init(stroke:stroke, points: points)!
-        
+        if points.count < 2
+        {
+            throw ShapeDecodingError.invalidPointsNumber
+        }
+        self.init(stroke:stroke, points: points)
     }
     
 }

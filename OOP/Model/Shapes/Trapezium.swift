@@ -7,7 +7,7 @@
 //
 //
 import UIKit
-class Trapezium: NSObject, Shape, Codable{
+class Trapezium: Shape, Codable{
 
     private let stroke: Stroke
     private let fill: Fill
@@ -129,25 +129,24 @@ class Trapezium: NSObject, Shape, Codable{
         self.stroke = stroke
         self.fill = fill
         self.points.append(firstPoint)
-        super.init()
     }
     
-    convenience init?(stroke: Stroke, fill: Fill, points: [CGPoint]) {
-        if points.count == 4 {
-            self.init(stroke: stroke, fill: fill, firstPoint: points.first!)
-            self.points = points
-        }
-        else {
-            return nil
-        }
+    init(stroke: Stroke, fill: Fill, points: [CGPoint]) {
+        self.stroke = stroke
+        self.fill = fill
+        self.points = points
     }
     
     convenience required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let points = try container.decode([CGPoint].self, forKey: .points)
+        if points.count != 4
+        {
+            throw ShapeDecodingError.invalidPointsNumber
+        }
         let stroke = try container.decode(Stroke.self, forKey: .stroke)
         let fill = try container.decode(Fill.self, forKey: .fill)
-        self.init(stroke: stroke, fill: fill, points: points)!
+        self.init(stroke: stroke, fill: fill, points: points)
         
         
     }

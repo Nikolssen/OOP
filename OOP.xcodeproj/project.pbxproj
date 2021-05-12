@@ -105,6 +105,12 @@
 			isa = PBXGroup;
 			children = (
 				8401E0D1264310CD003936B7 /* ShapeCreator.swift */,
+				8401E0D4264313A5003936B7 /* LineCreator.swift */,
+				8401E0D82643146A003936B7 /* PolygonCreator.swift */,
+				8401E0E226431688003936B7 /* CircleCreator.swift */,
+				8401E0DE26431592003936B7 /* OvalCreator.swift */,
+				8401E0DB26431516003936B7 /* RectangleCreator.swift */,
+				8401E0E5264316F0003936B7 /* TrapeziumCreator.swift */,
 			);
 			path = ShapeCreators;
 			sourceTree = "<group>";
@@ -130,8 +136,6 @@
 		84D137DF2646969E00297219 /* Line */ = {
 			isa = PBXGroup;
 			children = (
-				84FD995D25FBA34B0058293B /* Line.swift */,
-				8401E0D4264313A5003936B7 /* LineCreator.swift */,
 			);
 			path = Line;
 			sourceTree = "<group>";
@@ -139,8 +143,6 @@
 		84D137E0264696BA00297219 /* Polygon */ = {
 			isa = PBXGroup;
 			children = (
-				84C047DD25FD5532006DB895 /* Polygon.swift */,
-				8401E0D82643146A003936B7 /* PolygonCreator.swift */,
 			);
 			path = Polygon;
 			sourceTree = "<group>";
@@ -148,8 +150,6 @@
 		84D137E1264696CA00297219 /* Circle */ = {
 			isa = PBXGroup;
 			children = (
-				840B7BB12601448F00FF643D /* Circle.swift */,
-				8401E0E226431688003936B7 /* CircleCreator.swift */,
 			);
 			path = Circle;
 			sourceTree = "<group>";
@@ -157,8 +157,6 @@
 		84D137E2264696E400297219 /* Oval */ = {
 			isa = PBXGroup;
 			children = (
-				84C047DB25FD4FF5006DB895 /* Oval.swift */,
-				8401E0DE26431592003936B7 /* OvalCreator.swift */,
 			);
 			path = Oval;
 			sourceTree = "<group>";
@@ -166,8 +164,6 @@
 		84D137E32646970200297219 /* Rectangle */ = {
 			isa = PBXGroup;
 			children = (
-				84FD995F25FBB2720058293B /* Rectangle.swift */,
-				8401E0DB26431516003936B7 /* RectangleCreator.swift */,
 			);
 			path = Rectangle;
 			sourceTree = "<group>";
@@ -175,8 +171,6 @@
 		84D137E42646978000297219 /* Trapezium */ = {
 			isa = PBXGroup;
 			children = (
-				840B7BB326014A6F00FF643D /* Trapezium.swift */,
-				8401E0E5264316F0003936B7 /* TrapeziumCreator.swift */,
 			);
 			path = Trapezium;
 			sourceTree = "<group>";
@@ -279,6 +273,12 @@
 			isa = PBXGroup;
 			children = (
 				84FD995B25FBA1E90058293B /* Shape.swift */,
+				84FD995D25FBA34B0058293B /* Line.swift */,
+				84C047DD25FD5532006DB895 /* Polygon.swift */,
+				840B7BB12601448F00FF643D /* Circle.swift */,
+				84C047DB25FD4FF5006DB895 /* Oval.swift */,
+				84FD995F25FBB2720058293B /* Rectangle.swift */,
+				840B7BB326014A6F00FF643D /* Trapezium.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
